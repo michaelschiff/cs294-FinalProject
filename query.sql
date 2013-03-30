@@ -28,5 +28,5 @@ SELECT #labeled.Id AS Id,
 	   Posts.Body AS Body,
 	   Posts.AnswerCount AS AnswerCount,
 	   Posts.CommentCount AS CommentCount,
-	   Posts.FavoriteCount AS FavoriteCount, 
+	   Posts.FavoriteCount AS FavoriteCount
 FROM #labeled JOIN Posts on #labeled.Id=Posts.Id
