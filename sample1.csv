@@ -1,0 +1,1200 @@
+Id,Label,Title,Score,Tags,CreationDate,ViewCount,LastEditDate,LastActivityDate,Body,AnswerCount,CommentCount,FavoriteCount,NumEdits
+"14068081","0","ADB Connection Error","0","<android><adb>","2012-12-28 10:24:27","391","2012-12-28 10:25:10","2012-12-28 10:47:36","<p>Im trying to run my android application using command prompt, once i run the adb status in command prompt is getting hang and the message ""waiting for device"" is getting display on the command prompt. Each and everytime i need to close the emulator and running the application. here is my logcat error. please help me friends. </p>
+
+<pre><code>[2012-12-28 15:48:49 - DeviceMonitor] Adb connection Error:An existing
+connection was forcibly closed by the remote host [2012-12-28 15:48:49
+Unexpected error while launching logcat. Try reselecting the device.] An existing connection was forcibly closed by the remote host
+java.io.IOException: An existing connection was forcibly closed by the
+remote host     at sun.nio.ch.SocketDispatcher.read0(Native Method)     at
+sun.nio.ch.SocketDispatcher.read(Unknown Source)    at
+sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source)  at
+sun.nio.ch.IOUtil.read(Unknown Source)  at
+sun.nio.ch.SocketChannelImpl.read(Unknown Source)   at
+com.android.ddmlib.AdbHelper.executeRemoteCommand(AdbHelper.java:395)
+    at com.android.ddmlib.Device.executeShellCommand(Device.java:462)   at
+com.android.ddmuilib.logcat.LogCatReceiver$1.run(LogCatReceiver.java:110)
+    at java.lang.Thread.run(Unknown Source)
+
+[2012-12-28 15:48:50 - DeviceMonitor] Connection attempts: 1
+</code></pre>
+","1","1","","4"
+"14068083","0","5-dimensional plotting in matlab for classification","0","<matlab>","2012-12-28 10:24:40","104","","2012-12-29 01:10:18","<p>I want to create a 5 dimensional plotting in matlab. I have two files in my workspace. one is data(150*4). In this file, I have 150 data and each has 4 features. Since I want to classify them, I have another file called ""labels"" (150*1) that includes a label for each data in data files. In other words the label are the class of data and I have 3 class: 1,2,3
+I want to plot this classification, but i can't...</p>
+
+<p>Naris</p>
+","3","3","","3"
+"14068084","1","Opinion about synchronous requests in web workers","2","<javascript><ajax><xmlhttprequest><web-worker>","2012-12-28 10:24:56","151","","2012-12-29 17:43:17","<p>I want to know what do you think about this. Is recommended to use synchronous requests (XMLHttpRequest) in a web worker? What problems can I find?</p>
+
+<p>I have been testing this in my app and I haven't find any trouble. But I'm afraid of this synchronus behaviour because of old experiences with jQuery and AJAX.
+My app gets a big amount of data from several tables in a database, and this requires a time. For each bunch of data retrieved from a table, I need to instantly process it to not delay the whole thing too much. Meanwhile, the user is interacting with the browser, so it can be blocked, and I thought that web workers would work fine.
+Do you thing that this is a good solution? Or should I try with asynchronus requests?</p>
+
+<p>Thank you.</p>
+","1","3","","3"
+"14068097","0","Enabling Buttons after doInBackground finishes","0","<java><android><android-asynctask>","2012-12-28 10:25:51","93","2012-12-28 10:40:02","2012-12-28 10:55:38","<p>I would like to enable a few buttons from my main activity once the stuffs from <code>doInBackground()</code> is finished! Can someone please let me know how to do that?</p>
+
+<p>I can't use <code>findViewByID()</code> for making he button visible from the <code>AsyncTask</code> class as it's not an <code>activity</code> class! :/</p>
+","4","3","2","5"
+"14068100","0","How to get data from asmx webservice?","2","<android><xml-parsing><xml-serialization><android-asynctask><asmx>","2012-12-28 10:26:05","147","2012-12-28 10:50:34","2012-12-28 10:50:34","<p><img src=""http://i.stack.imgur.com/PiVTO.png"" alt=""i""></p>
+
+<p>I want to access the  name of customers that is in red color box, in the picture above, but it do not gives me data, it shows only ""anydata type( )"" only one time. I do not know what is category name, this is dynamic.<br>
+How to get data from this?  </p>
+
+<p>My code is: </p>
+
+<pre><code>@Override
+    protected void onPostExecute(SoapObject result) {
+        if (result != null) {
+
+            for(int i=0; i&lt;result.getPropertyCount(); i++)
+            {
+                Object resultObject = result.getProperty(i);
+                KvmSerializable ks = (KvmSerializable) resultObject;
+
+                for(int j=0; j&lt;ks.getPropertyCount(); j++)
+                {
+                    Object subObj = ks.getProperty(j);
+                    KvmSerializable subKs = (KvmSerializable) subObj;
+                    Log.d(""customer iiiii"", subKs.getProperty(j).toString());
+                }
+            }
+</code></pre>
+","","1","1","7"
+"14068103","1","Disable antialising when scaling images","0","<css><background-image><antialiasing>","2012-12-28 10:26:26","140","2012-12-28 10:38:20","2012-12-28 10:39:04","<blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href=""http://stackoverflow.com/questions/8597081/how-to-stretch-images-with-no-antialiasing"">How to stretch images with no antialiasing</a>  </p>
+</blockquote>
+
+
+
+<p>Is it in any way possible to disable antialiasing when scaling up an image ?</p>
+
+<p>Right now, i get something that looks like this :</p>
+
+<p><img src=""http://i.stack.imgur.com/NXJxc.png"" alt=""What i get""></p>
+
+<p>Using the following css code :</p>
+
+<pre><code>#bib { width:104px;height:104px;background-image:url(/media/buttonart_back.png);background-size:1132px 1360px;
+background-repeat:no-repeat;}
+</code></pre>
+
+<p>What I would like, is something like this :</p>
+
+<p><img src=""http://i.stack.imgur.com/t1lml.png"" alt=""What i seek""></p>
+
+<p>In short, any CSS flag to <strong>disable</strong> anti-aliasing from when scaling up images, preserving hard edges.</p>
+
+<p>Any javascript hacks or similar are welcome too.</p>
+
+<p>(Yes, I am aware that php and imagemagick can do this as well, but would prefer a css based solution.)</p>
+
+<p><strong>UPDATE</strong>
+The following have been suggested :</p>
+
+<pre><code>image-rendering: -moz-crisp-edges;
+image-rendering: -moz-crisp-edges;
+image-rendering: -o-crisp-edges;
+image-rendering: -webkit-optimize-contrast;
+-ms-interpolation-mode: nearest-neighbor;
+</code></pre>
+
+<p>But that doesn't seem to work on background images.</p>
+","3","0","","6"
+"14068105","0","linux: mount subdirectory of volume to the mount point","0","<linux><mount>","2012-12-28 10:26:39","103","","2012-12-28 10:26:39","<p>I have a idea: all my ""user data"" to get to the one volume. These includes directory /home and directory /srv. My idea is to create directory srv in volume with home directories and mount this <em>subdirectory</em> to the mount point /srv. Exist any way to create it?
+Yes, it is possible insert into ""user volume"" all directories from directory /srv and mount this whole volume to mount point /srv. But it is not so ""pretty"" - in that case I have in /srv every user directories and, on the other way, I see all /srv subdirectories in /home.</p>
+","","1","","4"
+"14068109","0","restlet scripts for fetching an item from saved search in netsuite...?","1","<netsuite>","2012-12-28 10:27:06","56","","2013-02-07 20:14:43","<p>there is no limit for coding how long is the code it doesn't matter.</p>
+
+<p>I want to do this because i got it from my company and i have to write a script for this any idea regarding this is accepted.</p>
+","0","1","1","3"
+"14068111","0","Need help for Combobox plugin in construct 2","0","<combobox>","2012-12-28 10:27:09","61","","2012-12-28 10:27:09","<p>I don't know if this is the right place to share my problem.
+I am new in construct 2 <a href=""http://www.scirra.com"" rel=""nofollow"">http://www.scirra.com</a>. And I am facing problem while using there combobox plugin.</p>
+
+<p>What I need to do:
+I need to used loop the files on my database. and display on combobox list.</p>
+
+<p>This is what I did:
+1. on system start I call ajax to fetch data from the database.
+2. I if ajax is complete then I will put value to combobox.
+3. when user click a value on the data inside the combobox, the data will display to the textbox.</p>
+
+<p>Problem: my problem here is, only one data display on combobox. Since I am new on construct 2 I am confuse how to use the loop to display data in combobox list.</p>
+
+<p>Please I need to solve this issue. Below is the link of my files.
+<a href=""http://www.mediafire.com/?m7t0jb7b9g9779j"" rel=""nofollow"">http://www.mediafire.com/?m7t0jb7b9g9779j</a></p>
+","","","","3"
+"14068114","1","Check instances of 3 paired letters","1","<c++><arrays><if-statement><for-loop>","2012-12-28 10:27:40","59","2012-12-28 11:43:33","2012-12-28 13:00:13","<p>Say i have an array <code>char myArrray[5] = {'T','T','T','T','T'}</code> And i want to check how many instances of 3 pairs of <code>T</code> i have. </p>
+
+<p>I have a forloop below that checks for all 3 instances of T. There should be 3 instances, but for some reason its not even entering the if statement that checks it.</p>
+
+<p>Maybe im just lost im really sleepy.</p>
+
+<p>There are 3 isntances of TTT throughout the array. Thats what we have to get the number 3 in the counter but we arent getting it. <code>(T{T[T)T}T]</code></p>
+
+<p>full code here: <a href=""http://ideone.com/AWyOkH"" rel=""nofollow"">http://ideone.com/AWyOkH</a></p>
+
+<p>Any ideas?</p>
+
+<pre><code>     for(int k = 0; k &lt; lineInputs; k++)
+{
+    int counter=0;
+    cout &lt;&lt; (k+1) &lt;&lt; "" "";
+
+    for(int u=0; u&lt;arrayElements; u++)
+    {
+        //cout &lt;&lt; myArray[u];
+        if(myArray[u] == 'T' &amp;&amp; myArray[u+1] == 'T' &amp;&amp; myArray[u+2] == 'T')
+        {
+            counter++;
+            cout &lt;&lt; counter &lt;&lt; "" "";
+        }
+    }
+}
+</code></pre>
+
+<p>Does the issue lay with <code>if(myArray[u] == 'T' &amp;&amp; myArray[u+1] == 'T' &amp;&amp; myArray[u+2] == 'T')</code> ?</p>
+","2","4","","8"
+"14068116","0","clicking chrome extension through outside event","0","<google-chrome><google><google-chrome-extension>","2012-12-28 10:27:43","11","","2012-12-28 10:27:43","<p>I have made an extension that possess other extensions like(adblockplus,httpseverywhere,wot).
+I want when i click button(wot written on it) , wot popup screen is automatically opened.</p>
+
+<p>Wot is separate extension and is added to chrome page.</p>
+","","1","","3"
+"14068119","1","python web crawling","2","<python><web-crawler><scrapy>","2012-12-28 10:28:01","321","2012-12-28 10:36:41","2012-12-29 18:45:15","<blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href=""http://stackoverflow.com/questions/14059691/python-web-crawling"">Python - web crawling</a>  </p>
+</blockquote>
+
+
+
+<p>The last question was closed as it was ""ambiguous"". So i'll try to be specific here:</p>
+
+<p>Consider this website :
+<a href=""http://www.tripadvisor.in/"" rel=""nofollow"">http://www.tripadvisor.in/</a></p>
+
+<p>and the reviews given at the bottom, 
+I need to be able to open the profile of the reviewer, and extract information like age, sex and location if it is public. </p>
+
+<p>A step-by-step process on how to achieve this would be appreciated.</p>
+
+<p>PS : Is this do-able using scrapy ?</p>
+
+<p>UPDATE : Assuming I have a database with the names of the users and i can directly open the member's profile for example, for Lulak</p>
+
+<p><a href=""http://www.tripadvisor.in/members/Lulak"" rel=""nofollow"">http://www.tripadvisor.in/members/Lulak</a></p>
+
+<p>How do i extract the Age, sex and location from this page</p>
+
+<p>Thanks</p>
+","2","9","1","6"
+"14068124","0","Crop image from byte array","1","<android><bitmap><bytearray>","2012-12-28 10:28:42","160","2012-12-28 13:43:40","2012-12-28 13:43:40","<p>My app let the user take a picture with the camera and return a byte array containing the image data (jpeg at the moment but can be modified).</p>
+
+<p>If we know the width and height of the picture, is it possible to use </p>
+
+<pre><code>BitmapFactory.decodeByteArray(data, offset, length)
+</code></pre>
+
+<p>To decode the picture from specified offset to get a squared picture ?</p>
+
+<p>The image is in high res (portrait) and I only need the squared bottom of this picture still in high res for image processing.</p>
+
+<pre><code>x offset = 0
+y offset = height - width
+width = width
+height = width
+</code></pre>
+
+<p>I have seen <a href=""http://stackoverflow.com/questions/6818415/crop-image-directly-from-byte-array"">this</a> answer but I still was wondering if this was possible. I could compress image data with another format if needed</p>
+
+<p>My guess was to compute the number of bytes used to store <code>n</code> rows of pixels (using known dimensions), where <code>n = maxRows - pictureWidth</code></p>
+
+<p>and then start from computed offset</p>
+","2","","1","6"
+"14068126","1","How do I Uncommit changes using git","3","<git><version-control><git-flow>","2012-12-28 10:29:12","212","","2012-12-28 10:37:08","<p>I'm using git flow, and without thinking, I've commited code to the wrong branch (feature), and then published it.</p>
+
+<p>I need to take that code, remove it from say, branch 1, and move it into the correct branch, which is branch 2.</p>
+
+<p>All the files are stored within one folder which could make things a lot easier, I'm just unsure on how to go about this.</p>
+
+<p>eg.</p>
+
+<pre><code>Branch 1 { 
+  Commit That contains {
+     ./path/to/files_that_should_be_here
+     ./path/to/files_that_need_to_be_in_branch_2
+  }
+}
+
+Branch 2 {
+   No Commits.
+}
+</code></pre>
+","2","","1","3"
+"14068128","0","Child html element's onclick event is blocked. how to conquer?","4","<javascript><jquery>","2012-12-28 10:29:17","128","2012-12-28 11:02:07","2012-12-28 11:07:49","<blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href=""http://stackoverflow.com/questions/1398582/prevent-execution-of-parent-event-handler"">Prevent execution of parent event handler</a>  </p>
+</blockquote>
+
+
+
+<p>I need to attach functions to onclick events of hierarchical divs.</p>
+
+<p>I have this HTML </p>
+
+<pre><code>&lt;div onclick=""event1()"" class=""wrapper""&gt;
+main contents 
+ &lt;div  onclick=""event2()""class=""inner""&gt;
+  inner contents
+ &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>now when i click on inner div <code>event1()</code> is being called, and event2() is not being called because I think my jquery plugin blocks it.</p>
+
+<p><strong>Edited ::</strong></p>
+
+<p>actually my plugin blocks the child node events so event2() is never being called how can i stop that ?</p>
+
+<p>I am using jquery full callender plugin : <a href=""http://arshaw.com/fullcalendar/"" rel=""nofollow"">http://arshaw.com/fullcalendar/</a><br>
+ and below is my configuration function which is being called on onready.</p>
+
+<pre><code>function calenderEvents(events, account_id) {
+
+
+    //Dynamically Set options as account type wise
+    var selectable_opt = '';
+    if (account_id == 'default') {
+        selectable_opt = true;
+    } else {
+        selectable_opt = false;
+    }
+
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    var calendar = $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: selectable_opt,
+        selectHelper: true,
+        eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
+            AfterMove(event);
+        },
+        select: function(start, end, allDay) {
+            var title = prompt('Event Title:');
+            if (title) {
+                var details = {
+                    title: title,
+                    start: start,
+                    end: end,
+                    allDay: allDay
+                };
+                $.post(SITE_URL + '/calendar/add-event', {
+                    details: details
+                }, function() {
+
+                });
+                calendar.fullCalendar('renderEvent', {
+                    title: title,
+                    start: start,
+                    end: end,
+                    allDay: allDay,
+                }, true // make the event ""stick""
+                );
+            }
+            calendar.fullCalendar('unselect');
+        },
+
+        /*eventMouseover: function() {
+
+            $('.fc-event-delete').css('display','block');   
+
+        },
+        eventMouseout: function() {
+            $('.fc-event-delete').css('display','none');        
+        },*/
+
+        editable: true,
+        events: events,
+    });
+    //}).limitEvents(2);
+}
+</code></pre>
+","4","4","","12"
+"14068129","1","Re-use web service response across datasets or subreports","2","<reporting-services><ssrs-2008>","2012-12-28 10:29:22","114","2012-12-28 11:43:50","2013-01-07 05:01:50","<p>I'm using a web service as my XML datasource which returns entities including multiple hierarchical data like below (codes modified for project privacy);</p>
+
+<pre class=""lang-cs prettyprint-override""><code>public class UserData {
+    // some scalar properties
+    public string Id ...
+    public string Name ...
+    public string Surname ...
+
+    // some navigational properties
+    public Address address ...
+    public CourseInfo[] courses ...
+    public AwardInfo[] awards ...
+}
+</code></pre>
+
+<p>To <strong>show all the entity information inside the same report</strong>, I can create different datasets in my report to call my web service and filter preferred parts of the returned service response.</p>
+
+<p>To get only UserData properties:</p>
+
+<pre class=""lang-xml prettyprint-override""><code>&lt;Query&gt;
+    &lt;Method Name=""GetUserData"" Namespace=""UserApp.ReportingServices""/&gt;
+    &lt;SoapAction&gt;UserApp.ReportingServices/IReportingService/GetUserData&lt;/SoapAction&gt;
+    &lt;ElementPath IgnoreNamespaces=""true""&gt;GetUserDataResponse{}/UserData&lt;/ElementPath&gt;
+&lt;/Query&gt;
+</code></pre>
+
+<p>To get Address information together with UserData properties:</p>
+
+<pre class=""lang-xml prettyprint-override""><code>&lt;Query&gt;
+    &lt;Method Name=""GetUserData"" Namespace=""UserApp.ReportingServices""/&gt;
+    &lt;SoapAction&gt;UserApp.ReportingServices/IReportingService/GetUserData&lt;/SoapAction&gt;
+    &lt;ElementPath IgnoreNamespaces=""true""&gt;GetUserDataResponse{}/UserData/Address&lt;/ElementPath&gt;
+&lt;/Query&gt;
+</code></pre>
+
+<p>To get course information together with UserData properties:</p>
+
+<pre class=""lang-xml prettyprint-override""><code>&lt;Query&gt;
+    &lt;Method Name=""GetUserData"" Namespace=""UserApp.ReportingServices""/&gt;
+    &lt;SoapAction&gt;UserApp.ReportingServices/IReportingService/GetUserData&lt;/SoapAction&gt;
+    &lt;ElementPath IgnoreNamespaces=""true""&gt;GetUserDataResponse{}/UserData/Courses/CourseInfo&lt;/ElementPath&gt;
+&lt;/Query&gt;
+</code></pre>
+
+<p>My question raises right here: If I use multiple dataset queries like above, my report will make <strong>a web service call for every dataset</strong> it has though my service always returns the same XML response which includes all the data needed for the three datasets above.</p>
+
+<p>Is there any way to re-use returned XML response of a query for the other datasets? If it would possible, my report would call the web service only one time, and datasets would filter different parts of that XML response without calling the web service again and again.</p>
+
+<p>If this is not possible, than what's the best practice about showing multiple hierarchical data inside the same report? Do I have to create different web services returning different hierarchical parts of the data?</p>
+","1","","","5"
+"14068133","1","How is @ used in MVC Razor and when is it required?","1","<html><asp.net-mvc><asp.net-mvc-3><razor><hidden-field>","2012-12-28 10:29:35","64","2013-01-20 18:06:14","2013-01-20 18:06:14","<p>I'm fairly new at MVC 3 but I came across a rather curious problem.
+I'm using the Razor syntax, and according to VS, I don't need to prefix <code>@</code> to statements if they are immediately preceded with another <code>@</code> statement, or once inside the code, the prefix <code>@</code> is no longer required.</p>
+
+<p>So here is my code in my View:</p>
+
+<pre><code>    @using (Html.BeginForm(""StudentSelect"", ""Home"", FormMethod.Post, new { id = ""sSelect"" }))  {
+
+        Html.HiddenFor(m =&gt; m.SelectedStudent);
+        foreach (Classes.CStudent item in Model.Students)
+        {
+            &lt;div class=""studentSelect""&gt;
+                &lt;div class=""studentname""&gt;@item.StudentName&lt;/div&gt;
+                &lt;div&gt;@item.Address&lt;/div&gt;
+            &lt;/div&gt;   
+        }
+    }
+</code></pre>
+
+<p>Take not that the <code>Html.HiddenFor</code> and <code>foreach</code> lines do not have <code>@</code> prefix.
+The generated HTML should produce a <code>&lt;form&gt;</code> followed by a <code>&lt;input type=""hidden""&gt;</code> field.
+However, upon checking the HTML on the generated page, the hidden input field is missing.</p>
+
+<pre><code>&lt;form action=""/Home/StudentSelect"" id=""sSelect"" method=""post""&gt;                
+   &lt;div class=""studentSelect""&gt;
+        &lt;div class=""studentname""&gt;Name1&lt;/div&gt;
+        &lt;div&gt;AAA&lt;/div&gt;
+   &lt;/div&gt;   
+   &lt;div class=""studentSelect""&gt;
+        &lt;div class=""studentname""&gt;Name2&lt;/div&gt;
+        &lt;div&gt;Address1&lt;/div&gt;
+   &lt;/div&gt;   
+&lt;/form&gt;
+</code></pre>
+
+<p>Am I doing something wrong? Why isn't the hidden input not rendered?
+Any clues would help. Thanks</p>
+
+<p>By the way, this code compiles correct. However, if I prefix <code>@</code> in front of <code>Html.HiddenFor</code> my code does not compile and Visual Studio produces an error.</p>
+","1","1","","6"
+"14068134","1","Changing data frame - Iterating through values in rows","1","<r>","2012-12-28 10:29:37","73","2012-12-28 11:00:07","2012-12-28 11:13:27","<p>I've got data frame and simply want to change values in few columns from strings to integers.</p>
+
+<p>How can I achive this in R?</p>
+
+<p>Suppose this are my data:</p>
+
+<pre><code>data.frame(
+    X = sample(1:10),
+    Y = sample(c(""yes"", ""no""), 10, replace = TRUE),
+    Z = sample(c(""yes"", ""no""), 10, replace = TRUE),
+    ZZ = sample(c(""yes"", ""no""), 10, replace = TRUE))
+</code></pre>
+
+<p>and I want to change:</p>
+
+<p>change column Y with given function f [ex. function f change ""yes"" to 2 and ""no"" to 1 in second column]</p>
+
+<p>Example of such function</p>
+
+<pre><code>f &lt;- function (x) {
+ if(x == ""yes"") {
+   return 2;
+ }
+ else {
+   return 11;
+ }
+}
+</code></pre>
+
+<p>change column ZZ with given function g [ex. function g change ""yes"" to 3 and ""no"" to 4 in fourth column]</p>
+","2","1","","5"
+"14068135","0","Spring IDE installation error","0","<eclipse>","2012-12-28 10:29:40","206","2012-12-28 10:33:21","2013-01-09 05:59:58","<p>i am new to springs first i wanna install spring ide in my eclipse indigo,i already have install maven integration with eclipse,bt by installing spring ide through eclipse marketplace i am getting dependencies error.like this</p>
+
+<pre><code>Cannot complete the install because one or more required items could not be found.
+  Software being installed: Spring IDE Security Extension (optional) 3.1.0.201210040510-RELEASE (org.springframework.ide.eclipse.security.feature.feature.group 3.1.0.201210040510-RELEASE)
+  Missing requirement: Spring IDE Live Beans Graph 3.1.0.201210040510-RELEASE (org.springframework.ide.eclipse.beans.ui.livegraph 3.1.0.201210040510-RELEASE) requires 'bundle org.eclipse.zest.core [1.0.0,2.0.0)' but it could not be found
+  Cannot satisfy dependency:
+    From: Spring IDE Core (required) 3.1.0.201210040510-RELEASE (org.springframework.ide.eclipse.feature.feature.group 3.1.0.201210040510-RELEASE)
+    To: org.springframework.ide.eclipse.beans.ui.livegraph [3.1.0.201210040510-RELEASE]
+  Cannot satisfy dependency:
+    From: Spring IDE Security Extension (optional) 3.1.0.201210040510-RELEASE (org.springframework.ide.eclipse.security.feature.feature.group 3.1.0.201210040510-RELEASE)
+    To: org.springframework.ide.eclipse.feature.feature.group 0.0.0
+</code></pre>
+
+<p>please give me solution,or any other alternative to start spring .Thanks in adv</p>
+","1","","","4"
+"14068136","0","Using which display Engine does the windows store apps works","0","<microsoft-metro><windows-store-apps><blend>","2012-12-28 10:29:43","11","","2012-12-28 10:29:43","<p>Could any one please tell me on which display engine does the windows store apps works, because I am little bit confused with blend and metro.</p>
+","","","","3"
+"14068138","0","Alternate to hasPermanentMenuKey() for Android 2.3.3","0","<android><android-menu>","2012-12-28 10:29:52","194","","2012-12-28 11:02:41","<p>I am building my App with API level 10. But it can be installed and used in later versions. I need to show Action Bar only if the device does not have menu button. For Example, Tablets, Google Galaxy Nexus Phone, etc. People suggest to use hasPermanentMenuKey() function. But it is available only after API level 14 I guess. Can anyone suggest me how to get around this issue?</p>
+
+<p>Thanks,
+Karthik</p>
+","1","2","","3"
+"14068146","0","mongo map reduce returning incorrect counts for data sets of over 100 documents","0","<mongodb><mapreduce>","2012-12-28 10:31:06","27","","2012-12-28 10:31:06","<blockquote>
+  <p><strong>Possible Duplicate:</strong><br>
+  <a href=""http://stackoverflow.com/questions/13318791/mapreduce-results-seem-limited-to-100"">MapReduce results seem limited to 100?</a>  </p>
+</blockquote>
+
+
+
+<p>I am having an issue with mongo mapreduce. </p>
+
+<p>I have a document specified as </p>
+
+<pre><code>public class Response
+  {
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Text { get; set; }
+    public DateTime DateGenerated { get; set; }
+    public string ChallengeName { get; set; }
+  }
+</code></pre>
+
+<p>I have added a number of documents to mongoDB all with the same ChallengeName.
+I want to count the number of docs with the same challenge name. Seems simple...</p>
+
+<p>I have produced the following map and reduce functions:</p>
+
+<pre><code>var map =
+          ""function() {emit(this.ChallengeName, 1);}"";
+
+var reduce =
+       ""function(key, values) {return values.length;}"";
+</code></pre>
+
+<p>And I have set the options as follows:</p>
+
+<pre><code>MapReduceOptionsBuilder options = new MapReduceOptionsBuilder();
+options.SetOutput(""output"");
+options.SetLimit(1000);
+</code></pre>
+
+<p>When I run the map reduce with under 100 documents the count returns the correct value, however when I run with 1000 documents the count returns with count = 101.</p>
+
+<p>What am I doing wrong?</p>
+","","6","","5"
+"14068148","0","Code Example For Converting AVI Video file to others and vice-versa","0","<asp.net><c#-4.0><video><type-conversion>","2012-12-28 10:31:28","197","","2012-12-28 10:31:28","<p>I need to convert one type of video files to others using ASP.net 4.0 C#, like if someone uploaded a video file of avi type then i need to convert this file into different formats like mp4, mpeg, flv, 3gpp etc and vice-versa if possible. I searched through internet and didn't get appropriate solution for this. It will be really helpful if i get some idea about this.
+Thanks in advance.</p>
+","","","","3"
+"14068151","0","Access denied to new window which was created from https page in ie9","1","<javascript><jquery><internet-explorer><web-security>","2012-12-28 10:31:38","88","2012-12-28 11:52:04","2013-02-26 03:51:10","<p>I'm trying to create a new window in Internet Explorer 9 from a page with HTTPS connection. I want to paste the new HTML contents from an AJAX callback to the popup like this:</p>
+
+<pre><code>var popup = window.top.open(""about:blank"", ""popup"", ""height=700,width=700"");
+</code></pre>
+
+<p>All other browsers work with the new window correctly, but in IE9 I get <em>Access denied</em> and can't work with the new window. I think it is because of some specific security reason, but I can't fix this problem. </p>
+
+<p>I didn't use other domains or something else. Seems that, because of <code>about:blank</code> as the URL, IE doesn't trust the new window and doesn't want to grant access to it from the originating HTTPS page.</p>
+","0","","","6"
+"14068152","0","When garbage collection occurs?","-3","<python><python-3.x><python-2.7>","2012-12-28 10:31:41","90","2012-12-28 10:38:47","2012-12-28 11:55:41","<pre><code>&gt;&gt;&gt;a=6
+&gt;&gt;&gt;b=5
+&gt;&gt;&gt;c=4
+&gt;&gt;&gt;d=c
+&gt;&gt;&gt;print(d)
+&gt;&gt;&gt;del b
+&gt;&gt;&gt;# a and b ""must be"" garbage collection or ""maybe"" garbage collection
+</code></pre>
+
+<p>a and b maybe Garbage collection or a and b must be Garbage collection ?
+How to prove it?</p>
+","3","2","","4"
+"14068154","0","Data from local storage is getting flushed off every time I refresh the page","0","<sencha-touch-2><local-storage>","2012-12-28 10:31:45","209","","2012-12-28 10:31:45","<p>m using sencha touch 2 and using local storage in it, 
+but the data is getting flushed of as soon as i refresh the page, can u please tell me whats wrong, here is the code for my store and insert delete function</p>
+
+<pre><code>Ext.define(""OfferDrive.store.CategoryStore"", {
+    extend: ""Ext.data.Store"",
+    requires: ""Ext.data.proxy.LocalStorage"",
+    config: {
+        model: ""OfferDrive.model.StoreCategories"",
+        proxy: {
+            type: 'localstorage',
+            id: 'favorite-category-store'
+        }
+    }
+});
+</code></pre>
+
+<p>here is the code from a view that adds or inserts the record in it</p>
+
+<pre><code>            var favCategoriesStore = Ext.getStore('CategoryStore');
+
+            for (var i=0; i&lt; categoryList.config.store.data.items.length; i++)
+            { 
+                if(categoryList.config.store.data.items[i].data.CheckUrl.indexOf(""Golden"") != -1){
+                    var record = favCategoriesStore.findRecord('Id', categoryList.config.store.data.items[i].data.Id)
+                    if (null == record){
+                        //insert
+                        var newFavorite = Ext.create(""OfferDrive.model.StoreCategories"", {
+                            Id: categoryList.config.store.data.items[i].data.Id,
+                            Name: categoryList.config.store.data.items[i].data.Name
+                        });
+                        favCategoriesStore.add(newFavorite);                                
+                    }
+                }else{
+                    var record = favCategoriesStore.findRecord('Id', categoryList.config.store.data.items[i].data.Id)
+                    if (null != record){
+                        //remove
+                        favCategoriesStore.remove(record);
+                    }
+                }
+            }
+
+            favCategoriesStore.sync();
+</code></pre>
+","","5","1","3"
+"14068166","1","Fiddler Reissue and Edit and Reissue from composer","0","<keyboard-shortcuts><fiddler>","2012-12-28 10:33:26","91","","2013-01-14 20:45:09","<p>I'm using Fiddler on daily life. However, the most used feature for me, such as <code>Reissue and Edit</code> and <code>Reissue from composer</code> don't have any shortcuts. I don't know how to use fiddler script for this.  Can anybody point a solution for this?</p>
+","1","2","","3"
+"14068169","1","While using boost, why should I take an error by parameter?","0","<exception><boost><parameter-passing>","2012-12-28 10:33:42","24","","2012-12-28 21:38:45","<p>I'm using boost, and I noticed it had overloaded many methods to use an error as parameter. If I know throw an error is a better approach, why should I use a parameter to know an exception?</p>
+","1","","","3"
+"14068170","1","Performance of POD files in Cocos3d","1","<performance><pod><cocos3d>","2012-12-28 10:33:50","85","2013-02-20 10:07:30","2013-02-20 10:07:30","<p>I've encountered problem with performance of loaded POD files. I'm using the ones created for online service with WebGL, so these models are pretty well detailed. The total number of models I got is large and I really want to avoid to remake them all. So, while increasing the number of models loaded in scene fps is dropping. Are there any general advices to improve performance without changing these models? I've disabled multisampling, tried to decrease textures' sizes, number of lights and other stuff like that. Also, all models are viewed by camera, so I could not use culling. These models are also different. Any suggestions?</p>
+","1","1","","4"
+"14068171","0","Get key of added record in IndexedDB","-4","<javascript><jquery><indexeddb>","2012-12-28 10:33:50","96","2012-12-29 00:51:51","2012-12-29 04:04:48","<p>I have this code in IndexedDB:</p>
+
+<pre><code>var request = objectStore.add({ entryType: entryType, entryDate: t});
+</code></pre>
+
+<p>Now I want to know the key of this record that was just added in. How do I do that?</p>
+
+<p>I found <a href=""http://msdn.microsoft.com/en-us/magazine/gg679063.aspx"" rel=""nofollow"">this article</a>, and this
+code:</p>
+
+<pre><code>var data = {""bookName"" : ""Name"", ""price"" : 100, ""rating"":""good""};
+var request = objectStore.add(data);
+request.onsuccess = function(event){
+    document.write(""Saved with id "", event.result)
+    var key = event.result;
+};
+</code></pre>
+
+<p>This does not work for me - key shows up as undefined. I think I am missing something basic here!</p>
+","2","2","","6"
+"14068174","1","C#: constructor of nested class makes ""inaccessible due to protection level""","2","<c#><class>","2012-12-28 10:34:06","102","","2012-12-28 10:40:37","<p>I have this piece of code, and error is generated, just because I haved added into a constructor for its class.</p>
+
+<pre><code>class NestedClass
+{
+   class A
+   {
+      A() {}
+   }
+
+   class B
+   {
+       // no constructor
+   }
+
+   public static void run()
+   {
+     A a = new A();  // error
+     B b = new B(); // no error
+   }
+}
+</code></pre>
+
+<p>And error is:</p>
+
+<pre><code>NestedExample.A is inaccessible due to protection level
+</code></pre>
+
+<p>Please help me explain this.</p>
+
+<p>Thanks :)</p>
+","6","","","3"
+"14068175","1","Sublime Text 2 config files on Windows","0","<windows><windows-7><windows-8><editor><sublimetext2>","2012-12-28 10:34:07","135","","2012-12-28 16:19:20","<p>I found there are several config files for SL2 on Windows, one in:</p>
+
+<pre><code> %AppData%\Sublime Text 2
+</code></pre>
+
+<p>and another one in</p>
+
+<pre><code>%SublimeText2InstallPath%\Data
+</code></pre>
+
+<p>So, which config files is used on Windows? and what is the purpose of having multiple copies of them? I find starting SL2 from the right-click context menu, running the .exe directly, and starting it from command line results in different configuration file being used, not sure what caused it. how do I set it so that it only uses just a single set of configuration files?</p>
+","1","","","3"
+"14068177","0","Maximum number of Awesomium WebCores can i spin simultaneously?","0","<c#><awesomium>","2012-12-28 10:34:46","122","","2013-02-01 22:11:44","<p>Using Awesomium version 1.6.6 for Windows, C#.</p>
+
+<p>i'm seeing some strange behaviors after 25 concurrent WebCore objects who browse in parallel to different sites. is there a hard max number of simultaneous WebCores one can use? can this be increased? i'm looking to achieve hundreds if not thousands of parallel browsing sessions based on Awesomium.</p>
+","1","","","3"
+"14068184","0","How to prevent the automatic sorting of arraylist on app restart from home in android?","0","<android><sorting><arraylist>","2012-12-28 10:35:19","48","2012-12-28 10:44:23","2012-12-28 10:44:23","<p>I am making an array list from the combination of 2 array lists having different items and i want to make sure that the newly created array list must always show the items in the same order in which they were added.<code>Initially,i get the list unsorted(this is what i want)</code>,but <code>when i restart the app from home</code>,<code>it performs some kind of automatic sorting</code>(which i don't want to happen).I have searched a lot for a solution so as to avoid this some kind of automatic sorting,but of no avail.Please help me in this regard.Thanks in advance.</p>
+
+<p>This is the first array list i am adding to s_contactNameArrayListSplash Array List.</p>
+
+<pre><code>                      if(!s_localContactNumberHolderArrayList.contains(l_phoneNumber))  
+                        {
+                            if(!s_contactNameArrayListSplash.contains(l_phoneNumber))
+                            {
+                                s_contactNameArrayListSplash.add(l_phoneNumber);
+                            }
+
+
+                        }
+</code></pre>
+
+<p>This is the second array list i am adding:</p>
+
+<pre><code>       if( m_localContactNameHolderArrayList != null &amp;&amp; m_localContactNameHolderArrayList.size() != 0)
+                    {
+                        for(int l_a = 0;l_a &lt; m_localContactNameHolderArrayList.size();l_a++)
+                        {
+                            s_contactNameArrayListSplash.add(m_localContactNameHolderArrayList.get(l_a));
+                        }
+                    }
+</code></pre>
+","","6","","4"
+"14068185","1","Setting up SVN locally?","1","<windows><svn><tortoisesvn>","2012-12-28 10:35:27","79","2012-12-28 11:13:29","2012-12-28 11:13:29","<p>While working on local projects, you can't get back to the state of file that was 1 day ago or 1 month ago. So it would be great if we could use SVN for local projects too.</p>
+
+<p>Does anyone know how to setup svn locally to keep projects' files versioned?</p>
+
+<p>By local, I mean I should be able to version files with <code>file://</code> or <code>http://localhost/projectName</code> with wamp installed. </p>
+
+<hr>
+
+<p>FYI, I am using windows 7.</p>
+","2","3","","7"
+"14068192","1","Sensible filenaming in Amazon S3","2","<image><amazon-web-services><amazon-s3><storage><scalability>","2012-12-28 10:35:45","42","2013-01-08 09:44:12","2013-01-08 09:44:12","<p>I'm working on a website which is starting to generate a large volume of user-uploaded photos, which are then converted into multi thumbnails of different sizes and stored. So far, these have been stored locally but I would like start storing and serving them via Amazon S3.</p>
+
+<p>I've read Amazon's bucket and file naming rules which are clear, but I am wondering if there are other practical best practices for future maintainability.</p>
+
+<p>Until now, I've been doing this:</p>
+
+<ul>
+<li>User with GUID 31928 uploads image.jpg at 12-01-15 15:38:44</li>
+<li>Thumbnail ""small"" gets stored as /s/28/19/3/31928/120115153844.jpg</li>
+</ul>
+
+<p>... where the the path is derived from the GUID and the image filename from the timestamp. This distributes files without creating massive folders, keeps everything sufficiently unique, and makes it possible for images to be matched against a GUID even manually. It's worked well so far.</p>
+
+<p>With S3, I'll probably be serving these images from a single bucket but as the bucket cannot contain sub-folders, I'm curious as to how other people are storing large volumes of images. For example:</p>
+
+<ul>
+<li>hash: 2fkoer983RoerWokfw.jpg</li>
+<li>guid_hash: 31928_2fkoer983RoerWokfw.jpg</li>
+<li>guid_size_hash: 31928_s_2fkoer983RoerWokfw.jpg</li>
+<li>... or something else?</li>
+</ul>
+
+<p>Am I over-thinking this? Any experience would be appreciated, thanks.</p>
+","1","","1","4"
+"14068196","0",".net Exception Details: System.IndexOutOfRangeException: There is no row at position 202","0","<.net>","2012-12-28 10:36:07","146","2012-12-28 10:44:06","2012-12-28 10:44:06","<p>I'm not a .net developer. But current .net developer resigned last week. Now, the one the .net app was getting this error.</p>
+
+<p>Exception Details: System.IndexOutOfRangeException: There is no row at position 202.</p>
+
+<p>when I check the table there are 202 records. I don't know how to solve this problem. Please help me.</p>
+
+<p>============== 
+update #1</p>
+
+<pre><code>&lt;asp:TemplateColumn HeaderText=""Category""&gt;
+&lt;ItemTemplate&gt;
+    &lt;asp:Label ID=""lblcategoryid"" Runat=""server"" text='&lt;%#GetCategoryName(Container.DataItem(""CategoryID""))%&gt;'&gt;
+&lt;/asp:Label&gt;
+&lt;/ItemTemplate&gt;
+</code></pre>
+","","3","","4"
+"14068203","0","Bootstrap and jumping to Anchors","0","<twitter-bootstrap>","2012-12-28 10:36:30","144","2013-01-08 19:32:31","2013-01-08 19:32:31","<p>I'm building a quick VPS main page for my dev server using bootstrap ( still learning ). But I cant get the anchors to line up to the top. I searched 2 hours about using bootstrap and different plugins to get the same effect as: 
+<a href=""http://twitter.github.com/bootstrap/components.html"" rel=""nofollow"">http://twitter.github.com/bootstrap/components.html</a></p>
+
+<p>When you chose a menu item on the left the page automatically scrolles down. And the anchor is aligned to the top. I think this is done with jQuery but I can't figure out how. My links do jump to the anchors but just barely so that they are visible.</p>
+
+<p>Can anyone tell me how this is achieved ?</p>
+","1","","","5"
+"14068204","0","Make an HTTP request non-replayable","0","<security><http><denial-of-service>","2012-12-28 10:36:30","59","2012-12-28 10:44:24","2013-02-15 09:57:10","<p>I have an application that runs on for example Google TV or Apple TV, which sends HTTP requests to a service of mine.</p>
+
+<p>Now if someone listens in on this request, they can replay it and in that way execute a Denial of Service (DOS) attack our service.</p>
+
+<p>Is there any way to make each request unique, so it cannot be replayed? </p>
+
+<p>I thought of sending the time encrypted in the request and check the difference between the server time and the time the request was sent, but I'm getting too big time differences to compare.</p>
+
+<p>Does anyone have a better idea? </p>
+","1","4","","6"
+"14068210","1","Converting a JApplet to .exe","1","<java><eclipse>","2012-12-28 10:37:02","47","2012-12-28 12:23:00","2012-12-28 13:22:00","<p>I have a small (Swing) JApplet that runs perfectly in Eclipse: it contains a label, two buttons and a menu, with minimum user interaction (when choosing a menu item, the color of the container changes).
+I converted this to a .jar: </p>
+
+<ul>
+<li>I right clicked the class name (Sw3.java)</li>
+<li>Selected ""Export"", then ""Java"", then ""JAR file""</li>
+<li>Next, I chose current project name as resource to export, doubled clicked the ""Default package"" underneath it, selected desired class name from the list of classes in the right (Sw3.java)</li>
+<li>Next, I ticked ""Export generated class files and resources"", selected the export destination as ""JAR file"" and placed it in ""Documents"" under the name ""Sw3.jar"". I also selected ""Compress the contents of the JAR file"".</li>
+<li>In the next screen I checked ""Export class file with compile errors"" and ""Export class file with compile warnings"" </li>
+</ul>
+
+<p>I heard the right way to obtain an exe file is to convert a .jar into .exe so I used the ""Launch4j"" application with the .jar obtained previously:</p>
+
+<ul>
+<li>In the ""Basic"" panel: specified OUTPUT FILE: C:\Users\jerry\Documents\Sw3.exe and the JAR file: C:\Users\jerry\Documents\Sw3.jar. </li>
+<li>Process priority NORMAL</li>
+<li>Header type: GUI</li>
+<li>MIN JRE Version: 1.0.0 </li>
+<li>I pressed the ""wheel"" and chose Project.xml and got a succesful confirmation message.</li>
+</ul>
+
+<p>I have JRE installed, so the .exe should work, but it doesn't work. What did I do wrong? I would start by investigating if the .JAR was correctly obtained, is that a good approach and how would I check that? Thank you!</p>
+
+<p>PS: Upon being advised to use JFrame instead of JApplet, I did that and still nothing happens when I double click the .exe in order to open it. This makes me suspect there is something wrong in the steps I described.</p>
+","1","4","","4"
+"14068212","1","Binary fortran file crashes under Make","0","<makefile><fortran>","2012-12-28 10:37:07","91","2012-12-28 12:43:41","2012-12-30 12:02:21","<p>I have a binary that runs under my default shell.</p>
+
+<p>The binary runs perfectly o.k. with:</p>
+
+<pre><code>./binary input.dat
+</code></pre>
+
+<p>However, if I put this inside a make file:</p>
+
+<pre><code> SHELL=/bin/bash
+
+ runos:
+      ./binary input.dat
+</code></pre>
+
+<p>The code crashes and leaves me quite helpless.
+Here is what I tested so far, everything inside my Make file and in the shell:</p>
+
+<ol>
+<li><code>ulimit -a</code>: identical.</li>
+<li>Set the shell to bash as seen above.</li>
+<li><p>diff of the environment variables in SHELL and Make with:</p>
+
+<p><code>
+  env | sort &gt; vars.1
+</code></p>
+
+<p>inside make</p>
+
+<p><code>
+  env | sort &gt; vars.2
+</code></p>
+
+<p>Then run the binary with the extra variables in Make with the following command:</p>
+
+<p><code>
+  env SHLVL=2 MAKELEVEL=1 MAKEFLAGS= ./binary input.dat
+</code></p></li>
+<li><p>strace in the shell and inside make:</p>
+
+<p><code>
+strace -o debug binary input.dat
+</code></p></li>
+</ol>
+
+<p>The code keeps on crashing in Make, and runs in the shell. I am already thinking to dump Make for my test cases and just write shell scripts. But I am curious to know what is the difference. </p>
+
+<p>The Fortran code (a mix of F77, F90 and F95) was compiled with gfortran-4.4 and the following options:</p>
+
+<pre><code>FFLAGS= -g -fbacktrace
+</code></pre>
+
+<p>So, the concrete question is, what can I do to make this binary run under make in Debian!?</p>
+
+<h3>update:</h3>
+
+<p>I just tested again in a CentOS machine (v5.8), The code inside Makefile does not crash (GNU Make version 3.81).
+I also tested on my Debian Wheezy and openSUSE 11.4, both with GNU Make version 3.82 - It crashes!
+I tested on Debian Squeeze with GNU Make version 3.81, and it does crash. So, I think it is not dependent on the GNU Make version.</p>
+
+<h3>error when crashing:</h3>
+
+<pre><code> enter timeloop
+ ------------------------------------------------------------------------
+ timestep:     1  time: 2.500E-02 days         delt: 2.500E-02 days        
+ -------------------------------------------
+    terminated in routine react_snia      
+    maximum number of iterations exceeded   
+    bye now ...                             
+ -------------------------------------------
+failure in timeloop
+no further time step reduction possible
+try reducing min. time step, bye now ...
+</code></pre>
+
+<h3>trying to work around 'GNU Make' using 'waf'</h3>
+
+<p>It has been a while since I wanted to test <a href=""http://code.google.com/p/waf/"" rel=""nofollow"">waf</a>, so here is another interesting observation:
+I wrote a <code>wscript</code> which contains a function:</p>
+
+<pre><code>import os
+
+def run(ctx):
+    os.system('./binary input.dat')
+</code></pre>
+
+<p>And <code>waf run</code> runs!</p>
+
+<p>If I changed the <code>run</code> method to:</p>
+
+<pre><code>import subprocess as sp
+def run(ctx):
+    sp.call('./binary input.dat', shell=True)
+</code></pre>
+
+<p>The binary also <em>works</em> as expected. </p>
+
+<p>So, now I am thinking <code>GNU Make</code> forks a new sub-shell in a way that causes may binary to fail (although, under RHEL 5.8 Make did work).</p>
+","1","8","","8"
+"14068218","1","get page title then get category posts named the same as the title","1","<php><wordpress>","2012-12-28 10:37:30","49","2012-12-28 11:06:22","2012-12-28 13:55:30","<p>So, basically,
+i created a slideshow.php template in order to query slider type of posts.</p>
+
+<p>What i'm now trying to do is i need to create a page and the slideshow will show me the posts which are included in the category name the same as the post page name.</p>
+
+<p>So if i have a Page named ""post"" the category name should be named ""post""</p>
+
+<p>I tried this:</p>
+
+<pre><code>echo $title=wp_title(); 
+</code></pre>
+
+<p>Here i get the page title Outside the loop.</p>
+
+<p>My query is like this:</p>
+
+<p>
+
+<pre><code>   query_posts(array('post_type'=&gt;'slider',
+                      'posts_per_page'=&gt;'20',
+'category_name' =&gt; '$title'
+                      ));
+</code></pre>
+
+<p>But this isn't working.</p>
+","3","3","","4"
+"14068219","1","How to debug GAE python, gql and datastore?","4","<python><google-app-engine><gae-datastore>","2012-12-28 10:37:39","89","2012-12-28 11:30:42","2013-01-03 11:18:01","<p>I have been struggling to find ways to debug some python scripts and gql datastore queries in GAE using textmate.</p>
+
+<p>For the gql queries, can we print the queries to see what's in the database? (like php print_r function).</p>
+
+<p>For the .py files, anyway we can log it? I tried using logging module. <code>logging.info</code> or <code>logging.debug</code> doesn't seem to return anything in the browser or the GAE <code>console.log</code>. Where does it suppose to return the output?</p>
+
+<p>Any help will be appreciated!</p>
+","2","2","","5"
+"14068222","1","Stack std::vector scope","1","<c++><vector><scope><return-value>","2012-12-28 10:37:47","70","","2012-12-28 10:42:19","<p>im new to c++ and i'm finding hard to understand some vector behaviours.
+I was trying to implement a function to return an array of int and i found many suggestions to use a vector like this:</p>
+
+<pre><code>vector&lt;int&gt; myFunc()
+{
+    vector&lt;int&gt; myVector;
+    //add elements to vector here...
+    return myVector;
+}
+</code></pre>
+
+<p>But from what i know 'myVector' is an object created on the stack, so isnt it going out of scope when the function end? when does its destructor get called?
+I know there are few other questions about returning vectors, but i need to clarify this specific point, hoping to not have duplicated a question. </p>
+","3","2","","3"
+"14068223","1","How to solve login issue while sharing post on Facebook","-1","<iphone><ios><xcode><facebook><ios-simulator>","2012-12-28 10:37:51","134","2012-12-28 11:09:04","2012-12-28 12:04:18","<p>i want to share a post on facebook it works fine when i use iOS 6 but in iOS 5 and iOS 5.1 it gives an issue of login, when i login and goes to already authorised page and press okay button it pulls me back to login like this and repeats again and again on these two pages
+<img src=""http://i.stack.imgur.com/gMBqz.png"" alt=""enter image description here""></p>
+
+<p>when i press okay it gives back </p>
+
+<p><img src=""http://i.stack.imgur.com/66iW1.png"" alt=""enter image description here""></p>
+
+<pre><code> case 1: // facebook
+        {
+            if(NSClassFromString(@""SLComposeViewController""))
+            {
+                SLComposeViewController *fbController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+                SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+
+                    [fbController dismissViewControllerAnimated:YES completion:nil];
+
+                    switch(result){
+                        case SLComposeViewControllerResultCancelled:
+                        default:
+                        {
+                            NSLog(@""Cancelled....."");
+
+                        }
+                            break;
+                        case SLComposeViewControllerResultDone:
+                        {
+                            ALERT_VIEW(@""Successfully posted to facebook."");
+                        }
+                            break;
+                    }};
+
+                [fbController setInitialText:quotesss];
+                [fbController setCompletionHandler:completionHandler];
+                [self presentViewController:fbController animated:YES completion:nil];
+            }
+            else
+            {
+                DEFacebookComposeViewControllerCompletionHandler completionHandler = ^(DEFacebookComposeViewControllerResult result) {
+                    switch (result) {
+                        case DEFacebookComposeViewControllerResultCancelled:
+                            NSLog(@""Facebook Result: Cancelled"");
+                            break;
+                        case DEFacebookComposeViewControllerResultDone:
+                            ALERT_VIEW(@""Successfully posted to facebook."");
+                            break;
+                    }
+
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                };
+                DEFacebookComposeViewController *facebookViewComposer = [[DEFacebookComposeViewController alloc] init];
+                self.modalPresentationStyle = UIModalPresentationCurrentContext;
+
+                [facebookViewComposer setInitialText:quotesss];
+
+                facebookViewComposer.completionHandler = completionHandler;
+                [self presentViewController:facebookViewComposer animated:YES completion:nil];
+                [facebookViewComposer release];
+            }
+            break;
+        }
+        case 2: // twitter
+        {
+            NSString *text = [NSString stringWithFormat:@""%@"", quotesss ];
+            if([text length] &gt; 135)
+            {
+                text = [NSString stringWithFormat:@""%@%@"", quotesss ,@""...""];
+                text = [text substringToIndex:135];
+
+            }
+
+            if(NSClassFromString(@""SLComposeViewController""))
+            {
+                SLComposeViewController *twitterController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+                SLComposeViewControllerCompletionHandler __block completionHandler=^(SLComposeViewControllerResult result){
+
+                    [twitterController dismissViewControllerAnimated:YES completion:nil];
+
+                    switch(result){
+                        case SLComposeViewControllerResultCancelled:
+                        default:
+                        {
+                            NSLog(@""Cancelled....."");
+
+                        }
+                            break;
+                        case SLComposeViewControllerResultDone:
+                        {
+                            ALERT_VIEW(@""Successfully posted to twitter."");
+                        }
+                            break;
+                      }};
+
+                [twitterController setInitialText:text];
+                [twitterController setCompletionHandler:completionHandler];
+                [self presentViewController:twitterController animated:YES completion:nil];
+            }
+
+            else
+            {
+                DETweetComposeViewControllerCompletionHandler completionHandler = ^(DETweetComposeViewControllerResult result) {
+                    switch (result) {
+                        case DETweetComposeViewControllerResultCancelled:
+                            NSLog(@""Twitter Result: Cancelled"");
+                            break;
+                        case DETweetComposeViewControllerResultDone:
+
+                            ALERT_VIEW(@""Successfully posted to twitter."");
+                            break;
+                    }
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                 };
+
+                DETweetComposeViewController *tcvc = [[[DETweetComposeViewController alloc] init] autorelease];
+                self.modalPresentationStyle = UIModalPresentationCurrentContext;
+                [tcvc setInitialText:quotesss];
+                tcvc.completionHandler = completionHandler;
+
+                [self presentViewController:tcvc animated:YES completion:nil];
+
+            }
+
+            break;
+        }
+</code></pre>
+","1","7","","4"
+"14068225","0","How to get Data from my website into my android app","-3","<php><json><web-services><parsing><website>","2012-12-28 10:37:57","129","2012-12-28 10:40:04","2012-12-28 10:43:31","<p>Well i know the answers will b json,xml,jsoup parsing....but how to impplement dese in my website so it can deliver the data my android app asks....</p>
+
+<p>Ex. if i want virgo horoscope from my website to b loaded in my app...wht are things i need to  do in my website for json...as i hv seen websites like twitter using json...</p>
+
+<p>my website is a plain html...no javascript,php/mysql,ajax...nthng....</p>
+
+<p>wht i must do to my website so dat it can give back json object/array as output to android app...???</p>
+","1","5","","5"
+"14068228","1","The Device Orientation method is not working for ios6","1","<iphone><ios><xcode><orientation>","2012-12-28 10:38:04","101","","2012-12-28 12:18:01","<p>My supports both Landscape &amp; Portrait mode in ios6. I also try with new methods of device rotation, But the methods are not called &amp; it does not support the orientation.</p>
+
+<p>My code is as follow:</p>
+
+<pre><code>-(NSUInteger)supportedInterfaceOrientations
+{
+    NSLog(@""supportedInterfaceOrientations..."");
+    return UIInterfaceOrientationMaskAll;
+}
+
+-(BOOL)shouldAutorotate
+{
+    NSLog(@""shouldAutoRotate..."");
+    return YES;
+}
+</code></pre>
+
+<p>I don't know the issue for this.</p>
+
+<p>Thanks...</p>
+","2","6","","3"
+"14068230","1","equalsIgnoreCase returns false even when strings are same in java","0","<java><string><swing>","2012-12-28 10:38:12","147","2013-01-02 13:08:56","2013-01-02 13:08:56","<pre><code>int locctr = 0,toknum = 0;
+
+    String temp;
+    String d;
+    String [] tok = new String[500];
+    String[] lines = CODE.getText().split(""\n"");
+    try
+    {
+        for(int i=0;i&lt;lines.length;i++)
+        {
+            temp = lines[i];
+            if(temp != null)
+            {
+                StringTokenizer st = new StringTokenizer(lines[i],"":,\t[]"",true); 
+                while (st.hasMoreTokens())
+        {
+                    String ss=st.nextToken();
+                    tok[toknum] = ss;  
+                    toknum++; //increment
+                }
+            }
+        }
+        System.out.print(""tok[0] is ""+tok[0]);
+        boolean r = tok[0].equalsIgnoreCase("".DATA"");
+        System.out.print(""r is : ""+r);
+        if(r == true)
+        {
+           System.out.print(""\n      INSIDE .DATA""); 
+        }
+    }
+    catch(Exception e)
+    {
+
+    }
+</code></pre>
+
+<p>// input should be accepted for CODE ...its been accepted using a .txt file
+CODE contains</p>
+
+<pre><code>.DATA
+ DATAENDS
+</code></pre>
+
+<p>this code should be executed on button click......</p>
+
+<p>PROBLEM : even when the value <code>@ tok[0] = .DATA</code> its returning false.....have checked the <code>tok[]</code> array to the data is getting assigned correctly.....
+but 
+condition it still gives false.....</p>
+
+<pre><code>OUTPUT :
+
+     temp is .DATA
+         SS IS .DATA
+         tok[num] .DATA
+         toknum 0
+     temp is DATAENDS
+         SS IS DATAENDS
+         tok[num] DATAENDS
+         toknum 1tok[0] is .DATA
+    r is : false
+</code></pre>
+","1","8","2","9"
+"14068238","0","how to make image item with original size in contentflow","0","<javascript><slideshow><javascript-library><carousel><contentflow>","2012-12-28 10:39:05","69","","2012-12-28 10:39:05","<p><img src=""http://i.stack.imgur.com/43Mmt.jpg"" alt=""enter image description here""></p>
+
+<p>When I using contentflow, I got the result above in IE 9.
+My item picture is 345*210, it should be show as a rectangle, but actually it shows as a square. how to make image item with its original size in contentflow in IE9. BTW，I have got right resluts in chrome and firefox several times. The document didnt helped me. </p>
+
+<pre><code>scaleFactor := float (default: 1.0)
+scaleFactorLandscape := float | string (default: 1.0)
+scaleFactorPortrait := float | string (default: 1.0)
+fixItemSize := bool (default: false)
+maxItemHeight := int (default: 0)
+</code></pre>
+
+<p>Those options above not work for this issue, and I am confused about those options.
+Any one has some ideas? tkx.</p>
+","","","","3"
+"14068241","1","Android start network thread from activity","0","<android><android-activity><android-service>","2012-12-28 10:39:26","134","","2013-02-10 05:46:44","<p>I need to start thread from my application which downloads from server JSON file periodically.<br>
+I created Service for this purpose and started the thread in onStartCommand as recomended in android literature.<br>
+The question is should I really create the service in order to start the thread or I could implement everithing within the main Activity?</p>
+","3","2","","3"
+"14068243","0","Passing a smarty foreach cycle variable into php code","0","<php><smarty>","2012-12-28 10:39:29","92","","2012-12-28 11:16:30","<p>I have foreach loop in smarty:</p>
+
+<pre><code>{foreach from=$clients item=client}
+    &lt;tr class=""{cycle values=""erow,""} elements""&gt;
+        &lt;td class=""tdcenter no-label""&gt;{$client-&gt;id}&lt;/td&gt;
+        &lt;td&gt;{$client-&gt;name}&lt;/td&gt;
+        &lt;td&gt;{$client-&gt;email}&lt;/td&gt;
+        &lt;td&gt;{$client-&gt;phone}&lt;/td&gt;
+        &lt;td&gt;{php} echo get_client_profit($client-&gt;name);{/php}&lt;/td&gt;
+    &lt;/tr&gt;
+ {/foreach}
+</code></pre>
+
+<p>I need to pass smarty variable <code>{$client-&gt;name}</code> to php function <code>get_client_profit</code>.  How should I do that? Is it possible?</p>
+","2","4","","3"
+"14068244","0","UIView rounded corners","-2","<objective-c><ios>","2012-12-28 10:39:34","80","2012-12-28 10:54:08","2012-12-28 11:23:57","<p>I have to round only upper corners of <code>UIView</code>. I'm trying to use the following code:</p>
+
+<pre><code>UIBezierPath *maskEmailPath = [UIBezierPath bezierPathWithRoundedRect:self.emailandAccessView.bounds byRoundingCorners:UIRectCornerBottomLeft cornerRadii:CGSizeMake(10.0, 10.0)];
+CAShapeLayer *maskEmailLayer = [CAShapeLayer layer];
+maskEmailLayer.frame = self.myview.bounds;
+maskEmailLayer.path = maskEmailPath.CGPath;
+self.myview.layer.mask = maskEmailLayer;
+</code></pre>
+
+<p>but it hides everything in that view. Can anyone please help me.</p>
+","1","2","","5"
+"14068246","1","proxy without authentication in settings.xml","0","<maven><maven-3>","2012-12-28 10:39:45","63","","2012-12-28 11:21:49","<p>I am looking for a way to set system proxy settings in settings.xml. If the proxy server does not need authentication, can I leave the username and password tag blank ? How can I achieve this ?</p>
+
+<p>I can not find any documents from maven on this : <a href=""http://maven.apache.org/guides/mini/guide-proxies.html"" rel=""nofollow"">http://maven.apache.org/guides/mini/guide-proxies.html</a></p>
+","1","3","","3"
+"14068247","1","Why am I getting undefined method `comments' when using acts_as_commentable_with_threading?","0","<ruby-on-rails><ruby-on-rails-3>","2012-12-28 10:39:54","43","2012-12-28 11:18:42","2012-12-28 16:41:34","<p>On the community's #show page, I get:</p>
+
+<blockquote>
+  <p>undefined method `comments'</p>
+</blockquote>
+
+<p>I was wondering why was I get this error?</p>
+
+<p><strong>community_topics_controller.rb</strong></p>
+
+<pre><code>def show
+  @community_topic = CommunityTopic.find params[:id]
+
+  @comment = @community_topic.comments.build
+  @community_topic.comments.pop
+
