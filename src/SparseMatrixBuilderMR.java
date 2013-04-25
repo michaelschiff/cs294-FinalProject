@@ -13,7 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class SparseMatrixBuilder {
+public class SparseMatrixBuilderMR {
 
 	public static class TestMapper extends
 			Mapper<LongWritable, List<Text>, LongWritable, List<Text>> {
