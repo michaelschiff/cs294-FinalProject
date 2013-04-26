@@ -6,35 +6,38 @@ import BIDMat.SciFunctions._
 import BIDMat.Solvers._
 import BIDMat.Plotting._
 
-object simpleClassifier extends LoadsMat with Classifies {
+object classify extends LoadsMat {
   Mat.noMKL=true  //can I comment this out for better performance???
-  NUM_FEATURES = 2
+  NUM_FEATURES = 3
   def main(args:Array[String]):Unit = {
     val (examples, labels) = loadMat(args(0))
-    var weights = ones(1, NUM_FEATURES)
-    while ( true ) {
+    val classifier = new simpleClassifier(examples, labels, NUM_FEATURES, 10000)
+    classifier.train
+  }
+}
+
+class simpleClassifier (examples:List[SMat], labels:List[FMat], num_features:Int, max_iters:Int) extends Classifies { 
+  var weights = ones(1, num_features)
+  def train(): Unit = {
+    var iter = 0
+    while ( iter < max_iters ) {
       for ( (x,y) <- examples zip labels ) {
-        //weights += update(x, y, weights) 
-        val predictions:FMat = (weights * x).t
-        val z:FMat = -1 * predictions
-        val logit:FMat = 1.0 /@ (1 + exp(z))
-        val differences = y - logit
-        println(scala.math.sqrt(sum((differences *@ differences), 1)(0,0)))
-        val gradients = (x * differences).t
-        weights +=  0.1f * gradients
+        weights = weights + update(x, y, weights)
       }
     }
   }
 }
 
+
+
 trait Classifies {
-  var ALPHA = 0.1f
+  var ALPHA = 0.00000001f
   def update(examples: SMat, labels: FMat, weights: FMat): FMat = {
     val predictions:FMat = (weights * examples).t
     val z:FMat = -1 * predictions
     val logit:FMat = 1.0 /@ (1 + exp(z))
     val differences = labels - logit
-    println(scala.math.sqrt(sum((differences *@ differences), 1)(0,0)))
+    println(scala.math.sqrt(sum((differences *@ differences), 1)(0,0))/differences.nrows)
     val gradients = (examples * differences).t
     return ALPHA * gradients
   }
@@ -62,7 +65,6 @@ trait LoadsMat {
         xv = lineIter.next.toFloat :: xv
       }
       val x = sparse(icol(xr), icol(xc), col(xv), NUM_FEATURES, 1)
-      println(x)
       if ( ySoFar == null ) { 
         ySoFar = y
         xSoFar = x
