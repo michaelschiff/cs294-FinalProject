@@ -24,22 +24,12 @@ import org.supercsv.prefs.CsvPreference;
 public class SparseMatrixBuilderDC {
 	HashMap<String, Integer> tokenDict;
 	HashMap<String, Integer> tagDict;
-	NLProcessor nlProcessor = null;
+	HashMap<String, Integer> nlDict; //Dictionary for telling which tag goes where
+	NLProcessor nlProcessor;
 	
 	public SparseMatrixBuilderDC()
 	{
 		nlProcessor = new NLProcessor(); // Added for Processing
-	}
-	
-	public static void main(String[] args) throws Exception {
-
-		SparseMatrixBuilderDC b = new SparseMatrixBuilderDC();
-
-//		b.tokenDict = b.parseDict("tokenDictionary.txt", 10000);
-//		System.out.println(b.tokenDict.size());
-//		b.tagDict = b.parseDict("tagDictionary.txt", -1);
-//		System.out.println(b.tagDict.size());
-		b.buildRows("data/QueryResults500000.csv");
 	}
 
 	private void buildRows(String dataFilename) throws Exception {
@@ -65,7 +55,7 @@ public class SparseMatrixBuilderDC {
 			
 			// hi Derrick, do stuff with the question body here!
 			String questionBody = (String) entry.get(9);
-//			String rowPart = parseQuestionBody(questionBody);
+			getNLFeatures(questionBody);
 			
 			String row = "";
 //			row+=rowPart;
@@ -81,9 +71,10 @@ public class SparseMatrixBuilderDC {
 
 	}
 	
-	private HashMap<String,Integer> parseQuestionBody(String text)
+	private HashMap<String,Integer> getNLFeatures(String text)
 	{
-		return nlProcessor.getTagCounts(text);
+		// Counts occurrences of each NL Tag as well as sentences length
+		return nlProcessor.getNLCounts(text);
 	}
 	
 	private CellProcessor[] getProcessors() {
@@ -94,4 +85,21 @@ public class SparseMatrixBuilderDC {
 		return processors;
 	}
 
+	
+	public static void main(String[] args) {
+
+		System.out.println();
+		SparseMatrixBuilderDC b = new SparseMatrixBuilderDC();
+		try {
+			b.buildRows("data/QueryResults500000.csv");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+//		b.tokenDict = b.parseDict("tokenDictionary.txt", 10000);
+//		System.out.println(b.tokenDict.size());
+//		b.tagDict = b.parseDict("tagDictionary.txt", -1);
+//		System.out.println(b.tagDict.size());
+	}
 }

@@ -23,8 +23,7 @@ public class NLProcessor {
 	public NLProcessor() {
 		TOKENIZER_FACTORY = new RegExTokenizerFactory("(-|'|\\d|\\p{L})+|\\S");
 		try {
-			FileInputStream fileIn = new FileInputStream(
-					"../pos-en-general-brown.HiddenMarkovModel");
+			FileInputStream fileIn = new FileInputStream("../pos-en-general-brown.HiddenMarkovModel");
 			ObjectInputStream objIn = new ObjectInputStream(fileIn);
 			HiddenMarkovModel hmm = (HiddenMarkovModel) objIn.readObject();
 			Streams.closeInputStream(objIn);
@@ -39,7 +38,7 @@ public class NLProcessor {
 	}
 
 	// http://www.cs.cmu.edu/~radar/dmg/MCALL/lingpipe-3.6.0/docs/api/com/aliasi/corpus/parsers/BrownPosParser.html
-	public HashMap<String,Integer> getTagCounts(String text)
+	public HashMap<String,Integer> getNLCounts(String text)
 	{
 		HashMap<String, Integer> counts = new HashMap<String, Integer>();
 		Tokenizer tokenizer = TOKENIZER_FACTORY.tokenizer(text.toCharArray(),
@@ -47,7 +46,7 @@ public class NLProcessor {
 		String[] tokens = tokenizer.tokenize();
 		String[] tags = decoder.firstBest(tokens);
 		for (int i = 0; i < tokens.length; ++i) {
-			if (counts.containsKey(tags[i]))
+			if (!counts.containsKey(tags[i]))
 			{
 				counts.put(tags[i], 1);
 			}
@@ -55,6 +54,7 @@ public class NLProcessor {
 			{
 				counts.put(tags[i], counts.get(tags[i])+1);
 			}
+//			System.out.println(tokens[i] + "_" + tags[i] + " ");
 		}
 		return counts;
 	}
