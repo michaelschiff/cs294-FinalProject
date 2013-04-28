@@ -24,6 +24,13 @@ import org.supercsv.prefs.CsvPreference;
 public class SparseMatrixBuilderDC {
 	HashMap<String, Integer> tokenDict;
 	HashMap<String, Integer> tagDict;
+	NLProcessor nlProcessor = null;
+	
+	public SparseMatrixBuilderDC()
+	{
+		nlProcessor = new NLProcessor(); // Added for Processing
+	}
+	
 	public static void main(String[] args) throws Exception {
 
 		SparseMatrixBuilderDC b = new SparseMatrixBuilderDC();
@@ -36,6 +43,7 @@ public class SparseMatrixBuilderDC {
 	}
 
 	private void buildRows(String dataFilename) throws Exception {
+		
 		File file = new File("matrix.txt");
 		if(!file.exists()) {
 			file.createNewFile();
@@ -75,12 +83,7 @@ public class SparseMatrixBuilderDC {
 	
 	private HashMap<String,Integer> parseQuestionBody(String text)
 	{
-		HashMap<String, Integer> counts = new HashMap<String, Integer>();
-		String[] splitText = text.split("\\s+");
-		for(String word : splitText) {
-			
-		}
-		return counts;
+		return nlProcessor.getTagCounts(text);
 	}
 	
 	private CellProcessor[] getProcessors() {
