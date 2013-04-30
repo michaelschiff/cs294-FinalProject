@@ -1,0 +1,2 @@
+sort -t$'\t' -k2,2 -nr tagDict.txt
+tail -n +2 QueryResults1800000.csv >> megaResults.txt

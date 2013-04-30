@@ -38,21 +38,26 @@ public class NLProcessor {
 	}
 
 	// http://www.cs.cmu.edu/~radar/dmg/MCALL/lingpipe-3.6.0/docs/api/com/aliasi/corpus/parsers/BrownPosParser.html
-	public HashMap<String,Integer> getNLCounts(String text)
+	public HashMap<Integer,Integer> getNLCounts(String text, HashMap<String,Integer> nlDict)
 	{
-		HashMap<String, Integer> counts = new HashMap<String, Integer>();
+		HashMap<Integer, Integer> counts = new HashMap<Integer, Integer>();
 		Tokenizer tokenizer = TOKENIZER_FACTORY.tokenizer(text.toCharArray(),
 				0, text.toCharArray().length);
 		String[] tokens = tokenizer.tokenize();
 		String[] tags = decoder.firstBest(tokens);
 		for (int i = 0; i < tokens.length; ++i) {
+			if (!nlDict.containsKey(tags[i]))
+			{
+				continue;
+			}
+			int nlIndex = nlDict.get(tags[i]);
 			if (!counts.containsKey(tags[i]))
 			{
-				counts.put(tags[i], 1);
+				counts.put(nlIndex, 1);
 			}
 			else 
 			{
-				counts.put(tags[i], counts.get(tags[i])+1);
+				counts.put(nlIndex, counts.get(nlIndex)+1);
 			}
 //			System.out.println(tokens[i] + "_" + tags[i] + " ");
 		}

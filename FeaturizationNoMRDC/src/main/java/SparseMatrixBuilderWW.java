@@ -24,30 +24,32 @@ import org.supercsv.prefs.CsvPreference;
 public class SparseMatrixBuilderWW {
 	HashMap<String, Integer> tokenDict;
 	HashMap<String, Integer> tagDict;
-	public static void main(String[] args) throws Exception {
-
-		SparseMatrixBuilderWW b = new SparseMatrixBuilderWW();
-
-		b.tokenDict = b.parseDict("tokenDictionary.txt", 10000);
-//		System.out.println(b.tokenDict.size());
-		b.tagDict = b.parseDict("tagDictionary.txt", -1);
-//		System.out.println(b.tagDict.size());
-		b.buildRows("QueryResults1800000.csv");
+	HashMap<String, Integer> nlDict; //Dictionary for telling which tag goes where
+	NLProcessor nlProcessor;
+	int numEntriesThreshold = Integer.MAX_VALUE; // Maximum number of entries to go through
+	
+	public SparseMatrixBuilderWW()
+	{
+		nlProcessor = new NLProcessor(); // Added for Processing
 	}
 
-	private HashMap<String, Integer> parseDict(String filename, int threshold)
+	private HashMap<String, Integer> parseDict(String filename, int maxDictSize, int freqThreshold)
 			throws Exception {
 		HashMap<String, Integer> dict = new HashMap<String, Integer>();
 
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
 		String line;
-		int numLines = 0;
+		int numLines = 1;
 		while ((line = reader.readLine()) != null) {
-			if(threshold != -1 && numLines >= threshold) {
+			if(maxDictSize != -1 && numLines >= maxDictSize) {
 				break;
 			}
 			String[] components = line.split("\t");
-			dict.put(components[0], numLines);
+			int freq = Integer.parseInt(components[1]);
+			if (freq>freqThreshold)
+			{
+				dict.put(components[0], numLines);
+			}
 			numLines++;
 		}
 		return dict;
@@ -67,17 +69,32 @@ public class SparseMatrixBuilderWW {
 									// CsvListReader)
 		final CellProcessor[] processors = getProcessors();
 		List<Object> entry;
-		while ((entry = listReader.read(processors)) != null) {
+		int entryCt = 1;
+		while (entryCt < numEntriesThreshold && (entry = listReader.read(processors)) != null) {
+			
 			// sanity check the CSV parsing
 			if (entry.size() != 14) {
 				continue;
 			}
 			
 			// hi Derrick, do stuff with the question body here!
-			String questionBody = (String) entry.get(9);
+			String fullQuestionBody = (String) entry.get(9);
+			int numFullBodyWords = fullQuestionBody.split("\\s+").length;
+			String[] codeNonCode = splitCodeNonCode(fullQuestionBody);
+			String codeBody = codeNonCode[0];
+			String questionBody = codeNonCode[1];
+			int numQuestionBodyWords = questionBody.split("\\s+").length;
+			int numSentencesForQuestionBody = getNumInstances(Pattern.compile("([\\.?!][\\s+<])|(\\s+</p>)"), questionBody);
+			
+			int numCodeBodyWords = codeBody.equals("") ? 0 : codeBody.split("\\s+").length;
+
+			//TODO: strip questionBody of all the code and put that into codeBody variable. 
+			//TODO: add feature for code length
+//			HashMap<Integer,Integer> nlFeatureCounts = new HashMap<Integer,Integer>(); 
+			HashMap<Integer,Integer> nlFeatureCounts = getNLFeatures(questionBody);
 			
 			// compile list of token indices
-			HashMap<String, Integer> wordCounts = countWords(questionBody);
+			HashMap<String, Integer> wordCounts = countWords(fullQuestionBody);
 			List<int[]> tokenIndices = new LinkedList<int[]>();
 			for(Entry<String, Integer> wcPair : wordCounts.entrySet()) {
 				if(this.tokenDict.containsKey(wcPair.getKey())) {
@@ -99,10 +116,16 @@ public class SparseMatrixBuilderWW {
 			}
 			
 			// get misc features
-			int numCodeExamples = getNumInstances(Pattern.compile("<pre><code>"), questionBody);
+			int numCodeExamples = getNumInstances(Pattern.compile("<pre><code>"), codeBody);
 						
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-			int numEdits = Integer.parseInt((String)entry.get(13));
+			int numEdits=0;
+			try {
+				numEdits = Integer.parseInt(((String)entry.get(13)).trim());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("something is wrong.");
+			}
 			String creationDate = (String) entry.get(5);
 			String editDate = (String) entry.get(7);
 //			System.out.println(entry);
@@ -114,18 +137,51 @@ public class SparseMatrixBuilderWW {
 			
 			int tokenFeaturesOffset = tokenDict.size();
 			int tagFeaturesOffset = tokenFeaturesOffset + tagDict.size();
+			int nlFeaturesOffset = tagFeaturesOffset + nlDict.size();
 			
 			String row = "" + label;
+			// prepare to write out token features
 			for(int[] coord : tokenIndices) {
-				row += " " + coord[0] + " " + coord[1]; 
+				row += (" " + coord[0] + " " + coord[1]); 
 			}
+			
+			// prepare to  write out tag features
 			for(int[] coord : tagIndices) {
-				row += " " + (coord[0] + tokenFeaturesOffset) + " " + coord[1]; 
+				row += (" " + (coord[0] + tokenFeaturesOffset) + " " + coord[1]); 
 			}
-			row += " " + tagFeaturesOffset + " " + numEdits;
-			row += " " + (tagFeaturesOffset + 1) + " " + editTimeElapsed;
+			
+			// TODO: prepare write out nl features
+			for (Entry<Integer,Integer> ent  : nlFeatureCounts.entrySet())
+			{
+				row += (" " + (ent.getKey() + tagFeaturesOffset)+ " " + ent.getValue());
+			}
+			
+			// prepare to write out misc features TODO: add total number of words and number of paragraphs (aka. number of newlines)
+			row += " " + (nlFeaturesOffset + 1) + " " + numEdits;
+			row += " " + (nlFeaturesOffset + 2) + " " + editTimeElapsed;
+			row += " " + (nlFeaturesOffset + 3) + " " + numCodeExamples;
+			row += " " + (nlFeaturesOffset + 4) + " " + numQuestionBodyWords;
+			row += " " + (nlFeaturesOffset + 5) + " " + numSentencesForQuestionBody;
+			if (numCodeBodyWords > 0)
+			{
+			row += " " + (nlFeaturesOffset + 6) + " " + numCodeBodyWords;
+			}
+			
+			//THINGS TO PRINT
+			if (entryCt%1000==0)
+			{
+				System.out.println("Entry #:"+entryCt);
+			}
+//			System.out.println("# of Active Features: " + row.split("\\s+").length/2);
+//			System.out.println("# of words for full body: " + numFullBodyWords);
+//			System.out.println("# of sentences for question body: " + numSentencesForQuestionBody);
+//			System.out.println("# of words for question body: " + numQuestionBodyWords);
+//			System.out.println("# of words for code body: " + numCodeBodyWords);
+			
+			// Write all the features
 			bw.write(row.toCharArray());
 			bw.write('\n');
+			entryCt+=1;
 		}
 
 		if (listReader != null) {
@@ -149,6 +205,73 @@ public class SparseMatrixBuilderWW {
 		return counts;
 	}
 	
+	//</code></pre>
+//	private String removeAll(String pattern, String str, String newStr)
+//	{
+//		return str.replaceAll(pattern,newStr);
+//	}
+//	
+//	private List<String> getMatches(Pattern pattern, String str)
+//	{
+//		List<String> matchStrs = new LinkedList<String>();
+//		Matcher matcher = pattern.matcher(str);
+//		while (matcher.find())
+//		{
+//			matchStrs.add(matcher.group());
+//		}
+//		return matchStrs;
+//	}
+//	
+//	private int getLineCtOfAllCode(List<String>strMatches)
+//	{
+//		int lineCt = 0;
+//		Pattern newLinePattern = Pattern.compile("\n");
+//		for (String str : strMatches)
+//		{
+//			lineCt+=getNumInstances(newLinePattern,str);
+//		}
+//		return lineCt;
+//	}
+	
+	private String[] splitCodeNonCode(String str)
+	{
+		String code="",nonCode ="";
+		Pattern startCode = Pattern.compile("<pre><code>");
+		Pattern endCode = Pattern.compile("</code></pre>");
+		String[] lines = str.split("\\n");
+		int ct = 0;
+		String line;
+		Boolean isCode = false;
+		while (ct < lines.length)
+		{
+			line = lines[ct]+ " "; //added make things easier when counting number of sentences
+			if (endCode.matcher(line).find())
+			{
+				isCode = false;
+				code+=line;
+				ct++;
+				continue;
+			} 
+			if (startCode.matcher(line).find())
+			{
+				isCode = true;
+				code+=line;
+				ct++;
+				continue;
+			}
+			if (isCode)
+			{
+				code+=line;
+			} else
+			{
+				nonCode+=line;
+			}
+			ct++;
+		}
+		String[] toReturn = new String[]{code,nonCode};
+		return toReturn;
+	}
+	
 	private int getNumInstances(Pattern pattern, String str) {
 		int numMatches = 0;
 		Matcher matcher = pattern.matcher(str);
@@ -156,6 +279,12 @@ public class SparseMatrixBuilderWW {
 			numMatches++;
 		}
 		return numMatches;
+	}
+	
+	private HashMap<Integer,Integer> getNLFeatures(String text)
+	{
+		// Counts occurrences of each NL Tag as well as sentences length
+		return nlProcessor.getNLCounts(text,nlDict);
 	}
 	
 	private CellProcessor[] getProcessors() {
@@ -166,4 +295,16 @@ public class SparseMatrixBuilderWW {
 		return processors;
 	}
 
+	public static void main(String[] args) throws Exception {
+
+		SparseMatrixBuilderWW b = new SparseMatrixBuilderWW();
+
+		b.tokenDict = b.parseDict("data/sortedTokenDict.txt", -1, 15);//10000
+//		System.out.println(b.tokenDict.size());
+		b.tagDict = b.parseDict("data/sortedTagDict.txt", -1,-1);
+//		System.out.println(b.tagDict.size());
+		b.nlDict = b.parseDict("data/nlDict.txt", -1,-1);
+//		System.out.println(b.nlDict.size());
+		b.buildRows("data/megaResults.csv");
+	}
 }
