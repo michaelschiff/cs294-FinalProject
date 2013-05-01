@@ -25,7 +25,8 @@ public class SparseMatrixBuilder {
 	HashMap<String, Integer> tokenDict;
 	HashMap<String, Integer> tagDict;
 	public static void main(String[] args) throws Exception {
-
+		long timeNow = System.currentTimeMillis();
+		System.out.println(System.currentTimeMillis());
 		SparseMatrixBuilder b = new SparseMatrixBuilder();
 
 		b.tokenDict = b.parseDict("tokenDictionary.txt", 10000);
@@ -33,6 +34,7 @@ public class SparseMatrixBuilder {
 		b.tagDict = b.parseDict("tagDictionary.txt", -1);
 //		System.out.println(b.tagDict.size());
 		b.buildRows("QueryResults1800000.csv");
+		System.out.println(System.currentTimeMillis()-timeNow);
 	}
 
 	private HashMap<String, Integer> parseDict(String filename, int threshold)
@@ -124,6 +126,7 @@ public class SparseMatrixBuilder {
 			}
 			row += " " + tagFeaturesOffset + " " + numEdits;
 			row += " " + (tagFeaturesOffset + 1) + " " + editTimeElapsed;
+			System.out.println(tagFeaturesOffset);
 			bw.write(row.toCharArray());
 			bw.write('\n');
 		}

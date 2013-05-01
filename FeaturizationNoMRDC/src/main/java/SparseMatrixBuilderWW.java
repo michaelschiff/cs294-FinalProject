@@ -302,7 +302,8 @@ public class SparseMatrixBuilderWW {
 		b.tokenDict = b.parseDict("data/sortedTokenDict.txt", -1, 15);//10000
 //		System.out.println(b.tokenDict.size());
 		b.tagDict = b.parseDict("data/sortedTagDict.txt", -1,-1);
-//		System.out.println(b.tagDict.size());
+		
+		System.out.println(b.tagDict.size());
 		b.nlDict = b.parseDict("data/nlDict.txt", -1,-1);
 //		System.out.println(b.nlDict.size());
 		b.buildRows("data/megaResults.csv");
