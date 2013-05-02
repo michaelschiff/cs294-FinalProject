@@ -7,6 +7,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from scipy.sparse import csr_matrix
+from sklearn import metrics
 import sys
 
 def main(data_file, num_features, num_samples):
@@ -38,32 +39,80 @@ def main(data_file, num_features, num_samples):
 	X_train, X_test, y_train, y_test = train_test_split(data_set.toarray(), labels, test_size=0.8)
 
 	classifier.fit(X_train, y_train)
-	score = classifier.score(X_test, y_test)
-	print 'Gaussian NB: ', score
+	pred_labels = classifier.predict(X_test)
+	precision, recall, f1_score, support = metrics.precision_recall_fscore_support(y_test, pred_labels)
+	print 'Gaussian NB: '
+	print 'precision:', precision
+	print 'recall:', recall
+	print 'f1:', f1_score
+	print '# occurrences:', support
+	fpr, tpr, thresholds = metrics.roc_curve(y_test, pred_labels, 1)
+	print 'fpr:', fpr
+	print 'tpr:', tpr
+	print 'thresholds:', thresholds
+	auc_score = metrics.auc_score(y_test, pred_labels)
+	print 'auc:', auc_score
 	with open('naive_bayes.pkl', 'wb') as fid:
 		cPickle.dump(classifier, fid)
+	print ''
 
 
 	classifier = MultinomialNB(alpha=0.5)
 	classifier.fit(X_train, y_train)
-	score = classifier.score(X_test, y_test)
-	print 'Multinomial NB:', score
+	pred_labels = classifier.predict(X_test)
+	precision, recall, f1_score, support = metrics.precision_recall_fscore_support(y_test, pred_labels)
+	print 'Multinomial NB: '
+	print 'precision:', precision
+	print 'recall:', recall
+	print 'f1:', f1_score
+	print '# occurrences:', support
+	fpr, tpr, thresholds = metrics.roc_curve(y_test, pred_labels, 1)
+	print 'fpr:', fpr
+	print 'tpr:', tpr
+	print 'thresholds:', thresholds
+	auc_score = metrics.auc_score(y_test, pred_labels)
+	print 'auc:', auc_score
 	with open('multinomialNB-alpha-0.5.pkl', 'wb') as fid:
 		cPickle.dump(classifier, fid)
+	print ''
 
 	classifier = LogisticRegression()
 	classifier.fit(X_train, y_train)
-	score = classifier.score(X_test, y_test)
-	print 'Logistic Regression:', score
+	pred_labels = classifier.predict(X_test)
+	precision, recall, f1_score, support = metrics.precision_recall_fscore_support(y_test, pred_labels)
+	print 'Logistic Regression: '
+	print 'precision:', precision
+	print 'recall:', recall
+	print 'f1:', f1_score
+	print '# occurrences:', support
+	fpr, tpr, thresholds = metrics.roc_curve(y_test, pred_labels, 1)
+	print 'fpr:', fpr
+	print 'tpr:', tpr
+	print 'thresholds:', thresholds
+	auc_score = metrics.auc_score(y_test, pred_labels)
+	print 'auc:', auc_score
 	with open('logisticregression.pkl', 'wb') as fid:
 		cPickle.dump(classifier, fid)
+	print ''
 
 	classifier = KNeighborsClassifier()
 	classifier.fit(X_train, y_train)
-	score = classifier.score(X_test, y_test)
-	print 'KNeighbors (5):', score
+	pred_labels = classifier.predict(X_test)
+	precision, recall, f1_score, support = metrics.precision_recall_fscore_support(y_test, pred_labels)
+	print 'K-Neighbors (5): '
+	print 'precision:', precision
+	print 'recall:', recall
+	print 'f1:', f1_score
+	print '# occurrences:', support
+	fpr, tpr, thresholds = metrics.roc_curve(y_test, pred_labels, 1)
+	print 'fpr:', fpr
+	print 'tpr:', tpr
+	print 'thresholds:', thresholds
+	auc_score = metrics.auc_score(y_test, pred_labels)
+	print 'auc:', auc_score
 	with open('kneighbors-5.pkl', 'wb') as fid:
 		cPickle.dump(classifier, fid)
+	print ''
 	
 	
 
