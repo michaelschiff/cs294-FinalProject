@@ -4,21 +4,25 @@ import cPickle
 def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
 	feature_dict = {}
 	num_features = 0
-	with open(token_dict_file, 'r') as f:
-		for line in f:
-			feature_dict[num_features] = 'token_' + line.split('\t')[0]
-			num_features += 1
+	# with open(token_dict_file, 'r') as f:
+	# 	for line in f:
+	# 		word, value = line.split('\t')
+	# 		if int(value) <= 15:
+	# 			break
+	# 		feature_dict[num_features] = 'token_' + word
+	# 		num_features += 1
 
 	with open(tag_dict_file, 'r') as f:
 		for line in f:
 			feature_dict[num_features] = 'tag_' + line.split('\t')[0]
 			num_features += 1
+	print len(feature_dict)
 
 	with open(pos_dict_file, 'r') as f:
 		for line in f:
 			feature_dict[num_features] = 'pos_' + line.split('\t')[0]
 			num_features += 1
-
+	print len(feature_dict)
 	feature_dict[num_features] = 'numEdits'
 	num_features += 1 
 
@@ -39,6 +43,8 @@ def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
 
 	with open('feature_dict.txt', 'wb') as f:
 		cPickle.dump(feature_dict, f)
+
+	print len(feature_dict)
 
 	return feature_dict
 

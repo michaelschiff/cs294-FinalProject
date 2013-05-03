@@ -22,41 +22,16 @@ class Classifier:
         return self.classifier.predict(x)
     def evaluate(self, x, y):
         pred = self.predict(x)
+        
+        pred_prob = self.roc_plot_input(x)
+        print len(pred), len(pred_prob), len(y)
         precision, recall, f1_score, support = metrics.precision_recall_fscore_support(y, pred)
-        fpr, tpr, thresholds = metrics.roc_curve(y, pred)
-        auc_score = metrics.auc_score(y, pred)
+        fpr, tpr, thresholds = metrics.roc_curve(y, pred_prob)
+        auc_score = metrics.auc_score(y.astype(np.double), pred)
         return (precision, recall, f1_score, support, fpr, tpr, thresholds, auc_score)
 
-def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
-	feature_dict = {}
-	num_features = 0
-	with open(token_dict_file, 'r') as f:
-		for line in f:
-			feature_dict[num_features] = 'token_' + line.split('\t')[0]
-			num_features += 1
-	with open(tag_dict_file, 'r') as f:
-		for line in f:
-			feature_dict[num_features] = 'tag_' + line.split('\t')[0]
-			num_features += 1
-	with open(pos_dict_file, 'r') as f:
-		for line in f:
-			feature_dict[num_features] = 'pos_' + line.split('\t')[0]
-			num_features += 1
-	feature_dict[num_features] = 'numEdits'
-	num_features += 1 
-	feature_dict[num_features] = 'editTimeElapsed'
-	num_features += 1 
-	feature_dict[num_features] = 'numCodeExamples'
-	num_features += 1 
-	feature_dict[num_features] = 'numQuestionBodyWords'
-	num_features += 1 
-	feature_dict[num_features] = 'numSentencesForQuestionBody'
-	num_features += 1 
-	feature_dict[num_features] = 'numCodeBodyWords'
-	num_features += 1 
-	with open('feature_dict.txt', 'wb') as f:
-		cPickle.dump(feature_dict, f)
-	return feature_dict
+    def roc_plot_input(self, x):
+        return [c[1] for c in self.classifier.predict_proba(x)]
 
 class ClassifierPool:
     def __init__(self, classifiers):
@@ -78,6 +53,7 @@ class ClassifierPool:
         fpr, tpr, thresholds = metrics.roc_curve(y, pred)
         auc_score = metrics.auc_score(y, pred)
         self.print_metrics((precision, recall, f1_score, support, fpr, tpr, thresholds, auc_score), "Ensemble Classifier")
+    
     def individualEvaluate(self, x, y):
         for classifier in self.classifiers:
             self.print_metrics(classifier.evaluate(x, y), classifier.name)
@@ -139,7 +115,7 @@ def load_data(datafile, num_features):
     return (tX, hX, np.array(tY), np.array(hY))
 
 def load_data1(data_file, num_features, num_samples):
-    sillyNumber = 0
+    sillyNumber = 1
     labels = []
     data = []
     ij = [[],[]]
@@ -166,10 +142,41 @@ def load_data1(data_file, num_features, num_samples):
     return train_test_split(data_set.toarray(), labels, test_size=0.8)
 
 
+def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
+    feature_dict = {}
+    num_features = 0
+    with open(token_dict_file, 'r') as f:
+        for line in f:
+            feature_dict[num_features] = 'token_' + line.split('\t')[0]
+            num_features += 1
+    with open(tag_dict_file, 'r') as f:
+        for line in f:
+            feature_dict[num_features] = 'tag_' + line.split('\t')[0]
+            num_features += 1
+    with open(pos_dict_file, 'r') as f:
+        for line in f:
+            feature_dict[num_features] = 'pos_' + line.split('\t')[0]
+            num_features += 1
+    feature_dict[num_features] = 'numEdits'
+    num_features += 1 
+    feature_dict[num_features] = 'editTimeElapsed'
+    num_features += 1 
+    feature_dict[num_features] = 'numCodeExamples'
+    num_features += 1 
+    feature_dict[num_features] = 'numQuestionBodyWords'
+    num_features += 1 
+    feature_dict[num_features] = 'numSentencesForQuestionBody'
+    num_features += 1 
+    feature_dict[num_features] = 'numCodeBodyWords'
+    num_features += 1 
+    with open('feature_dict.txt', 'wb') as f:
+        cPickle.dump(feature_dict, f)
+    return feature_dict
 
 if __name__ == "__main__":
-    X_train, X_test, y_train, y_test = load_data(sys.argv[1], int(sys.argv[2]))#, int(sys.argv[3]))
-    pool = ClassifierPool([Classifier(GaussianNB(), "GNB"), Classifier(MultinomialNB(alpha=0.5), "MNB"), Classifier(LogisticRegression(), "LR"), Classifier(KNeighborsClassifier(), "KNN")])
+    X_train, X_test, y_train, y_test = load_data1(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
+    # pool = ClassifierPool([Classifier(GaussianNB(), "GNB"), Classifier(MultinomialNB(alpha=0.5), "MNB"), Classifier(LogisticRegression(), "LR"), Classifier(KNeighborsClassifier(), "KNN")])
+    pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
     pool.train(X_train, y_train)
-    pool.evaluate(X_test, y_test)
+    # pool.evaluate(X_test, y_test)
     pool.individualEvaluate(X_test, y_test)
