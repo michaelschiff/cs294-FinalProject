@@ -27,8 +27,16 @@ class Classifier:
         print len(pred), len(pred_prob), len(y)
         precision, recall, f1_score, support = metrics.precision_recall_fscore_support(y, pred)
         fpr, tpr, thresholds = metrics.roc_curve(y, pred_prob)
-        auc_score = metrics.auc_score(y.astype(np.double), pred)
+        auc_score = metrics.auc_score(y.astype(np.double), pred_prob)
+        self.writeYPred(y,pred_prob)
         return (precision, recall, f1_score, support, fpr, tpr, thresholds, auc_score)
+	
+    def writeYPred(self,y,pred):
+        f = open('YPred.txt','wb')
+        for y_i,p in zip(y,pred):
+            f.write(str(y_i)+' '+str(p)+'\n')
+        f.close()
+        return
 
     def roc_plot_input(self, x):
         return [c[1] for c in self.classifier.predict_proba(x)]
