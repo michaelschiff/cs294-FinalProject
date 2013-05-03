@@ -2,7 +2,7 @@ import numpy as np
 import cPickle
 from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import MultinomialNB
-#from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn.cross_validation import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
@@ -133,7 +133,10 @@ def load_data(datafile, num_features):
                 for (i,v) in grouper(splitLine, 2):
                     tX[trainingExamples, int(i)-1] = float(v)
                 trainingExamples += 1
-    return (tX.todense(), hX.todense(), np.array(tY), np.array(hY))
+    tX = StandardScaler(with_mean=False).fit_transform(tX.todense())
+    hX = StandardScaler(with_mean=False).fit_transform(hX.todense())
+    
+    return (tX, hX, np.array(tY), np.array(hY))
 
 def load_data1(data_file, num_features, num_samples):
     sillyNumber = 0
@@ -159,7 +162,7 @@ def load_data1(data_file, num_features, num_samples):
 
     print len(data), len(ij[0])
     data_set = csr_matrix((data, ij), shape=(num_samples, num_features))
-    #data_set = StandardScaler(with_mean=False).fit_transform(data_set.astype(np.double))
+    data_set = StandardScaler(with_mean=False).fit_transform(data_set.astype(np.double))
     return train_test_split(data_set.toarray(), labels, test_size=0.8)
 
 
