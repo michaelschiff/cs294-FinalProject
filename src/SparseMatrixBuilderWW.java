@@ -27,7 +27,7 @@ public class SparseMatrixBuilderWW {
 	HashMap<String, Integer> nlDict; //Dictionary for telling which tag goes where
 	NLProcessor nlProcessor;
 	//int numEntriesThreshold = Integer.MAX_VALUE; // Maximum number of entries to go through
-	int numEntriesThreshold = 5000;
+	int numEntriesThreshold = Integer.MAX_VALUE;
 	public SparseMatrixBuilderWW()
 	{
 		nlProcessor = new NLProcessor(); // Added for Processing
