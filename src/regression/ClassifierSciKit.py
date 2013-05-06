@@ -5,7 +5,10 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.preprocessing import StandardScaler
 from sklearn.cross_validation import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import SGDClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from scipy.sparse import csr_matrix, dok_matrix
 from sklearn import metrics
 import sys
@@ -147,7 +150,7 @@ def load_data1(data_file, num_features, num_samples):
 
     print len(data), len(ij[0])
     data_set = csr_matrix((data, ij), shape=(num_samples, num_features))
-    data_set = StandardScaler(with_mean=False).fit_transform(data_set.astype(np.double))
+    #data_set = StandardScaler(with_mean=False).fit_transform(data_set.astype(np.double))
     return train_test_split(data_set.toarray(), labels, test_size=0.8)
 
 
@@ -185,7 +188,10 @@ def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
 if __name__ == "__main__":
     X_train, X_test, y_train, y_test = load_data1(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
     # pool = ClassifierPool([Classifier(GaussianNB(), "GNB"), Classifier(MultinomialNB(alpha=0.5), "MNB"), Classifier(LogisticRegression(), "LR"), Classifier(KNeighborsClassifier(), "KNN")])
-    pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
+    # pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
+    # pool = ClassifierPool([Classifier(SGDClassifier(n_iter=10, loss='log', shuffle=True), "SGD")])
+    # pool = ClassifierPool([Classifier(DecisionTreeClassifier(), "DT")])
+    pool = ClassifierPool([Classifier(RandomForestClassifier(), "RF")])
     pool.train(X_train, y_train)
     # pool.evaluate(X_test, y_test)
     pool.individualEvaluate(X_test, y_test)

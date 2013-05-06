@@ -12,17 +12,17 @@ def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
 	# 		feature_dict[num_features] = 'token_' + word
 	# 		num_features += 1
 
-	with open(tag_dict_file, 'r') as f:
-		for line in f:
-			feature_dict[num_features] = 'tag_' + line.split('\t')[0]
-			num_features += 1
-	print len(feature_dict)
+	# with open(tag_dict_file, 'r') as f:
+	# 	for line in f:
+	# 		feature_dict[num_features] = 'tag_' + line.split('\t')[0]
+	# 		num_features += 1
+	# print len(feature_dict)
 
 	with open(pos_dict_file, 'r') as f:
 		for line in f:
 			feature_dict[num_features] = 'pos_' + line.split('\t')[0]
 			num_features += 1
-	print len(feature_dict)
+
 	feature_dict[num_features] = 'numEdits'
 	num_features += 1 
 
@@ -41,7 +41,7 @@ def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
 	feature_dict[num_features] = 'numCodeBodyWords'
 	num_features += 1 
 
-	with open('feature_dict.txt', 'wb') as f:
+	with open('feature_dict-pos.txt', 'wb') as f:
 		cPickle.dump(feature_dict, f)
 
 	print len(feature_dict)

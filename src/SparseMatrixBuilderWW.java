@@ -27,7 +27,7 @@ public class SparseMatrixBuilderWW {
 	HashMap<String, Integer> nlDict; //Dictionary for telling which tag goes where
 	NLProcessor nlProcessor;
 	//int numEntriesThreshold = Integer.MAX_VALUE; // Maximum number of entries to go through
-	int numEntriesThreshold = 5000;
+	int numEntriesThreshold = Integer.MAX_VALUE;
 	public SparseMatrixBuilderWW()
 	{
 		nlProcessor = new NLProcessor(); // Added for Processing
@@ -56,10 +56,12 @@ public class SparseMatrixBuilderWW {
 	}
 
 	private void buildRows(String dataFilename) throws Exception {
-		File file = new File("matrix-pos.txt");
+		File file = new File("matrix-foo.txt");
 		if(!file.exists()) {
 			file.createNewFile();
 		}
+		
+		System.out.println(tokenDict.size() + " " + tagDict.size() + " " + nlDict.size());
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
 		
