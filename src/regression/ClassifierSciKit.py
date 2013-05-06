@@ -11,6 +11,7 @@ from sklearn import metrics
 import sys
 from itertools import izip_longest
 
+# python ClassifierSciKit.py ../../FeaturizationNoMRDC/v1Matrix.txt 44442 100
 class Classifier:
     def __init__(self, classifier, name):
         self.name = name
