@@ -56,10 +56,12 @@ public class SparseMatrixBuilderWW {
 	}
 
 	private void buildRows(String dataFilename) throws Exception {
-		File file = new File("matrix-pos.txt");
+		File file = new File("matrix-foo.txt");
 		if(!file.exists()) {
 			file.createNewFile();
 		}
+		
+		System.out.println(tokenDict.size() + " " + tagDict.size() + " " + nlDict.size());
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);
 		
