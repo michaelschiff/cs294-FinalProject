@@ -187,10 +187,10 @@ def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
 if __name__ == "__main__":
     X_train, X_test, y_train, y_test = load_data1(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
     # pool = ClassifierPool([Classifier(GaussianNB(), "GNB"), Classifier(MultinomialNB(alpha=0.5), "MNB"), Classifier(LogisticRegression(), "LR"), Classifier(KNeighborsClassifier(), "KNN")])
-    # pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
+    pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
     # pool = ClassifierPool([Classifier(SGDClassifier(n_iter=10, loss='log', shuffle=True), "SGD")])
     # pool = ClassifierPool([Classifier(DecisionTreeClassifier(), "DT")])
-    pool = ClassifierPool([Classifier(RandomForestClassifier(), "RF")])
+    # pool = ClassifierPool([Classifier(RandomForestClassifier(), "RF")])
     pool.train(X_train, y_train)
     # pool.evaluate(X_test, y_test)
     pool.individualEvaluate(X_test, y_test)
