@@ -31,9 +31,11 @@ class Classifier:
         print len(pred), len(pred_prob), len(y)
         precision, recall, f1_score, support = metrics.precision_recall_fscore_support(y, pred)
         fpr, tpr, thresholds = metrics.roc_curve(y, pred_prob)
+	#auc_score=metrics.auc(fpr,tpr)
         auc_score = metrics.auc_score(y.astype(np.double), pred_prob)
+	accuracy = metrics.accuracy_score(y,pred)
         self.writeYPred(y,pred_prob)
-        return (precision, recall, f1_score, support, fpr, tpr, thresholds, auc_score)
+        return (precision, recall, f1_score, support, fpr, tpr, thresholds, auc_score,accuracy)
 	
     def writeYPred(self,y,pred):
         f = open('YPred.txt','wb')
@@ -70,7 +72,7 @@ class ClassifierPool:
         for classifier in self.classifiers:
             self.print_metrics(classifier.evaluate(x, y), classifier.name)
 
-    def print_metrics(self, (precision, recall, f1_score, support, fpr, tpr, thresholds, auc_score), name):
+    def print_metrics(self, (precision, recall, f1_score, support, fpr, tpr, thresholds, auc_score,accuracy), name):
         print name
         print 'precision:', precision
         print 'recall:', recall
@@ -80,6 +82,7 @@ class ClassifierPool:
         print 'tpr:', tpr
         print 'thresholds:', thresholds
         print 'auc:', auc_score
+	print 'accuracy:', accuracy
         print "\n"
 
 def load_data(datafile, num_features):
@@ -187,11 +190,12 @@ def build_feature_dict(token_dict_file, tag_dict_file, pos_dict_file):
 
 if __name__ == "__main__":
     X_train, X_test, y_train, y_test = load_data1(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
-    # pool = ClassifierPool([Classifier(GaussianNB(), "GNB"), Classifier(MultinomialNB(alpha=0.5), "MNB"), Classifier(LogisticRegression(), "LR"), Classifier(KNeighborsClassifier(), "KNN")])
-    # pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
-    # pool = ClassifierPool([Classifier(SGDClassifier(n_iter=10, loss='log', shuffle=True), "SGD")])
-    # pool = ClassifierPool([Classifier(DecisionTreeClassifier(), "DT")])
+    #pool = ClassifierPool([Classifier(GaussianNB(), "GNB"), Classifier(MultinomialNB(alpha=0.5), "MNB"), Classifier(LogisticRegression(), "LR"), Classifier(KNeighborsClassifier(), "KNN")])
+    #pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
+    #pool = ClassifierPool([Classifier(SGDClassifier(n_iter=10, loss='log', shuffle=True), "SGD")])
+    #pool = ClassifierPool([Classifier(DecisionTreeClassifier(), "DT")])
     pool = ClassifierPool([Classifier(RandomForestClassifier(), "RF")])
+    #pool = ClassifierPool([Classifier(KNeighborsClassifier(), "KNN")])
     pool.train(X_train, y_train)
     # pool.evaluate(X_test, y_test)
     pool.individualEvaluate(X_test, y_test)
