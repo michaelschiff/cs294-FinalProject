@@ -18,16 +18,21 @@ import org.supercsv.prefs.CsvPreference;
 /**
  * 0: Id 1: Label 2: Title 3: Score 4: Tags 5: CreationDate 6: ViewCount 7:
  * LastEditDate 8: LastActivityDate 9: Body 10: AnswerCount 11: CommentCount 12:
- * FavoriteCount 13: NumEdits
+ * FavoriteCount 13: NumEdits 14: UserId 15: UserCreationDate 16: UserLastAccessDate
+ * 17: UserReputation
+ * 18: UserViews 
  */
 
 public class SparseMatrixBuilderWW {
 	HashMap<String, Integer> tokenDict;
 	HashMap<String, Integer> tagDict;
 	HashMap<String, Integer> nlDict; //Dictionary for telling which tag goes where
+	
 	NLProcessor nlProcessor;
-	//int numEntriesThreshold = Integer.MAX_VALUE; // Maximum number of entries to go through
+
+	int numCsvCols;
 	int numEntriesThreshold = Integer.MAX_VALUE;
+	
 	public SparseMatrixBuilderWW()
 	{
 		nlProcessor = new NLProcessor(); // Added for Processing
@@ -56,7 +61,7 @@ public class SparseMatrixBuilderWW {
 	}
 
 	private void buildRows(String dataFilename) throws Exception {
-		File file = new File("matrix-foo.txt");
+		File file = new File("matrix-javascript-tag-nl.txt");
 		if(!file.exists()) {
 			file.createNewFile();
 		}
@@ -75,11 +80,10 @@ public class SparseMatrixBuilderWW {
 		while (entryCt < numEntriesThreshold && (entry = listReader.read(processors)) != null) {
 			
 			// sanity check the CSV parsing
-			if (entry.size() != 14) {
+			if (entry.size() != numCsvCols) {
 				continue;
 			}
 			
-			// hi Derrick, do stuff with the question body here!
 			String fullQuestionBody = (String) entry.get(9);
 			int numFullBodyWords = fullQuestionBody.split("\\s+").length;
 			String[] codeNonCode = splitCodeNonCode(fullQuestionBody);
@@ -87,11 +91,8 @@ public class SparseMatrixBuilderWW {
 			String questionBody = codeNonCode[1];
 			int numQuestionBodyWords = questionBody.split("\\s+").length;
 			int numSentencesForQuestionBody = getNumInstances(Pattern.compile("([\\.?!][\\s+<])|(\\s+</p>)"), questionBody);
-			
 			int numCodeBodyWords = codeBody.equals("") ? 0 : codeBody.split("\\s+").length;
 
-			//TODO: strip questionBody of all the code and put that into codeBody variable. 
-			//TODO: add feature for code length
 //			HashMap<Integer,Integer> nlFeatureCounts = new HashMap<Integer,Integer>(); 
 			HashMap<Integer,Integer> nlFeatureCounts = getNLFeatures(questionBody);
 			
@@ -135,14 +136,20 @@ public class SparseMatrixBuilderWW {
 			if(editDate != null && creationDate != null) {
 				editTimeElapsed = dateFormat.parse(editDate).getTime() - dateFormat.parse(creationDate).getTime();
 			}
+
+//			int userRep = Integer.parseInt((String)entry.get(17));
+//			int userViews = Integer.parseInt((String)entry.get(18));
+//			long userCreationDate = dateFormat.parse((String)entry.get(15)).getTime();
+//			long userActiveDate = dateFormat.parse((String)entry.get(16)).getTime();
 			int label = Integer.parseInt((String) entry.get(1));
 			
-			//int tokenFeaturesOffset = tokenDict.size();
+//			int tokenFeaturesOffset = tokenDict.size();
 			int tokenFeaturesOffset = 1;
-			//int tagFeaturesOffset = tokenFeaturesOffset + tagDict.size();
+//			int tagFeaturesOffset = tokenFeaturesOffset + tagDict.size();
 			int tagFeaturesOffset = 1;
+//			int nlFeaturesOffset = tagFeaturesOffset;
 			int nlFeaturesOffset = tagFeaturesOffset + nlDict.size();
-			
+//			int nlFeaturesOffset = 1;
 			String row = "" + label;
 //			// prepare to write out token features
 //			for(int[] coord : tokenIndices) {
@@ -166,11 +173,19 @@ public class SparseMatrixBuilderWW {
 			row += " " + (nlFeaturesOffset + 2) + " " + numCodeExamples;
 			row += " " + (nlFeaturesOffset + 3) + " " + numQuestionBodyWords;
 			row += " " + (nlFeaturesOffset + 4) + " " + numSentencesForQuestionBody;
-			if (numCodeBodyWords > 0)
-			{
-			row += " " + (nlFeaturesOffset + 5) + " " + numCodeBodyWords;
-			}
-			
+//			row += " " + (nlFeaturesOffset + 5) + " " + userRep;
+//			row += " " + (nlFeaturesOffset + 6) + " " + userViews;
+//			row += " " + (nlFeaturesOffset + 7) + " " + userCreationDate;
+//			row += " " + (nlFeaturesOffset + 8) + " " + userActiveDate;
+//			row += " " + (nlFeaturesOffset + 9) + " " + (userActiveDate - userCreationDate);
+//			row += " " + (nlFeaturesOffset) + " " + userRep;
+//			row += " " + (nlFeaturesOffset + 1) + " " + userViews;
+//			row += " " + (nlFeaturesOffset + 2) + " " + numCodeExamples;
+//			if (numCodeBodyWords > 0)
+//			{
+//			row += " " + (nlFeaturesOffset) + " " + numCodeBodyWords;
+//			}
+//			
 			//THINGS TO PRINT
 			if (entryCt%1000==0)
 			{
@@ -303,13 +318,14 @@ public class SparseMatrixBuilderWW {
 
 		SparseMatrixBuilderWW b = new SparseMatrixBuilderWW();
 
-		b.tokenDict = b.parseDict("FeaturizationNoMRDC/data/sortedTokenDict.txt", -1, 15);//10000
+		b.tokenDict = b.parseDict("src/dictionary/javascriptTokenDict.txt", -1, 15);//10000
 //		System.out.println(b.tokenDict.size());
-		b.tagDict = b.parseDict("FeaturizationNoMRDC/data/sortedTagDict.txt", -1,-1);
-		
-		System.out.println(b.tagDict.size());
+		b.tagDict = b.parseDict("src/dictionary/javascriptTagDict.txt", -1,-1);
+//		System.out.println(b.tagDict.size());
 		b.nlDict = b.parseDict("FeaturizationNoMRDC/data/nlDict.txt", -1,-1);
 //		System.out.println(b.nlDict.size());
-		b.buildRows("FeaturizationNoMRDC/data/megaResults.csv");
+		b.numCsvCols = 14;
+		b.numEntriesThreshold = 30000;
+		b.buildRows("QueryResults3500000-javascript.csv");
 	}
 }
