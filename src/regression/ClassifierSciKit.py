@@ -11,7 +11,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from scipy.sparse import csr_matrix, dok_matrix
 from sklearn import metrics
+from sklearn import svm
 import sys
+
 from itertools import izip_longest
 
 # python ClassifierSciKit.py ../../FeaturizationNoMRDC/v1Matrix.txt 44442 100
@@ -194,8 +196,9 @@ if __name__ == "__main__":
     #pool = ClassifierPool([Classifier(LogisticRegression(), "LR")])
     #pool = ClassifierPool([Classifier(SGDClassifier(n_iter=10, loss='log', shuffle=True), "SGD")])
     #pool = ClassifierPool([Classifier(DecisionTreeClassifier(), "DT")])
-    pool = ClassifierPool([Classifier(RandomForestClassifier(), "RF")])
+    #pool = ClassifierPool([Classifier(RandomForestClassifier(), "RF")])
     #pool = ClassifierPool([Classifier(KNeighborsClassifier(), "KNN")])
+    pool = ClassifierPool([Classifier(svm.SVC(kernel='rbf',probability=True),"SVM")])
     pool.train(X_train, y_train)
-    # pool.evaluate(X_test, y_test)
+    #pool.evaluate(X_test, y_test)
     pool.individualEvaluate(X_test, y_test)
